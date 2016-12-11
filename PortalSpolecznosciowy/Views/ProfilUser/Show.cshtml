@@ -1,0 +1,36 @@
+﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Informacje o użytkowniku";
+}
+
+<div class="row">
+    <div class="col-md-3 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Dane użytkownika
+            </div>
+            <div class="panel-body text-center">
+                <h2>@Html.ActionLink(Model.UserName, "Edit", "ProfilUser", new {id = Model.Id}, null)</h2>
+
+                @if (Model.Sex == "m")
+                {
+                    <p>Mężczyzna</p>
+                }
+                else
+                {
+                    <p>Kobieta</p>
+                }
+                <p>@Model.Email</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>Velit mollis odio sollicitudin lacinia aliquam posuere, sapien elementum lobortis tincidunt, turpis dui ornare nisl, sollicitudin interdum turpis nunc eget sem nulla eu ultricies orci praesent id augue nec lorem pretium congue sit amet ac nunc fusce iaculis lorem eu diam hendrerit at mattis purus dignissim vivamus mauris tellus, fringilla vel dapibus a, blandit quis erat vivamus elementum aliquam luctus etiam fringilla pretium sem vitae sodales mauris id nulla est praesent laoreet, metus vel auctor aliquam, eros purus vulputate leo, eget consequat neque quam id tellus duis ultricies tempor tortor, vitae dignissim ligula mattis nec in hac habitasse platea dictumst.</p>
+            </div>
+        </div>
+    </div>
+</div>

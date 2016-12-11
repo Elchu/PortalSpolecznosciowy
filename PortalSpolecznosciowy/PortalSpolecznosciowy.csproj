@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfilUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,10 @@
     <Compile Include="Migrations\201612111244056_AddFieldSexToDatabase.cs" />
     <Compile Include="Migrations\201612111244056_AddFieldSexToDatabase.Designer.cs">
       <DependentUpon>201612111244056_AddFieldSexToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612111809398_FullNameToUser.cs" />
+    <Compile Include="Migrations\201612111809398_FullNameToUser.Designer.cs">
+      <DependentUpon>201612111809398_FullNameToUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -278,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ProfilUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -293,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612111244056_AddFieldSexToDatabase.resx">
       <DependentUpon>201612111244056_AddFieldSexToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612111809398_FullNameToUser.resx">
+      <DependentUpon>201612111809398_FullNameToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
