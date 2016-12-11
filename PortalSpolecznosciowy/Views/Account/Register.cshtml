@@ -1,6 +1,7 @@
-﻿@model PortalSpolecznosciowy.Models.RegisterViewModel
+﻿@using System.Web.UI.WebControls
+@model PortalSpolecznosciowy.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Rejestracja";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -18,6 +19,17 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Sex, new SelectListItem[]
+                                                            {
+                                                                 new SelectListItem() { Text = "Mężczyzna", Value = "m" },
+                                                                 new SelectListItem() { Text = "Kobieta", Value = "f" }
+                                                            },
+                                                            new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
@@ -31,7 +43,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+            <input type="submit" class="btn btn-default" value="Zarejestruj" />
         </div>
     </div>
 }
