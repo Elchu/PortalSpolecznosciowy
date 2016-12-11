@@ -21,7 +21,7 @@ namespace PortalSpolecznosciowy.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("PortalSpolecznosciowyConnection", throwIfV1Schema: false)
         {
         }
 
