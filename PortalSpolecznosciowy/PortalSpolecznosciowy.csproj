@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201612111229175_InitialCreate.Designer.cs">
       <DependentUpon>201612111229175_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612111244056_AddFieldSexToDatabase.cs" />
+    <Compile Include="Migrations\201612111244056_AddFieldSexToDatabase.Designer.cs">
+      <DependentUpon>201612111244056_AddFieldSexToDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -285,6 +289,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612111229175_InitialCreate.resx">
       <DependentUpon>201612111229175_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612111244056_AddFieldSexToDatabase.resx">
+      <DependentUpon>201612111244056_AddFieldSexToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
