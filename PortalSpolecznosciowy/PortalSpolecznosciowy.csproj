@@ -215,6 +215,14 @@
     <Compile Include="Migrations\201612111809398_FullNameToUser.Designer.cs">
       <DependentUpon>201612111809398_FullNameToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612121445242_addRequiredSexAndFullName.cs" />
+    <Compile Include="Migrations\201612121445242_addRequiredSexAndFullName.Designer.cs">
+      <DependentUpon>201612121445242_addRequiredSexAndFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612121622142_addFieldImageToUsers.cs" />
+    <Compile Include="Migrations\201612121622142_addFieldImageToUsers.Designer.cs">
+      <DependentUpon>201612121622142_addFieldImageToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -281,11 +289,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ProfilUser\Edit.cshtml" />
-    <Content Include="Views\ProfilUser\Index.cshtml" />
     <Content Include="Views\ProfilUser\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\UploadUsersAvatars\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -304,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612111809398_FullNameToUser.resx">
       <DependentUpon>201612111809398_FullNameToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121445242_addRequiredSexAndFullName.resx">
+      <DependentUpon>201612121445242_addRequiredSexAndFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121622142_addFieldImageToUsers.resx">
+      <DependentUpon>201612121622142_addFieldImageToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

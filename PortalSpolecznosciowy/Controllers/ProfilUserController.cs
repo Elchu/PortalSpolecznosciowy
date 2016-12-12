@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -43,22 +44,51 @@ namespace PortalSpolecznosciowy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Sex,FullName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,Sex,FullName")] ApplicationUser profilUser, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = _db.Users.Find(applicationUser.Id);
+                ApplicationUser user = _db.Users.Find(profilUser.Id);
 
                 if (user != null)
                 {
-                    user.Sex = applicationUser.Sex;
-                    user.FullName = applicationUser.FullName;
-                    _db.SaveChanges();
-                }
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(file.FileName);
+                        string pathDirectory = Path.Combine(Server.MapPath("~/Content/UploadUsersAvatars"), profilUser.Id);
+                        string pathFile = Path.Combine(Server.MapPath("~/Content/UploadUsersAvatars/"+ profilUser.Id), fileName);
+
+                        if (Directory.Exists(pathDirectory))
+                            Directory.Delete(pathDirectory, true);
+                        
+                        Directory.CreateDirectory(pathDirectory);
+                        
+                        try
+                        {
+                            file.SaveAs(pathFile);
+                            user.Image = Path.GetFileName(file.FileName);
+                        }
+                        catch (Exception e)
+                        {
+                            //wypisac komunikat o bledzie
+                        }
+                    }
                     
-                return RedirectToAction("Index");
+                    user.Sex = profilUser.Sex;
+                    user.FullName = profilUser.FullName;
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        //tutaj trzeba usunac plik z avatarem jesli zapisywanie do bazy sie nie powiodło
+                    }
+
+                }
+                return RedirectToAction("Index", "Home");
             }
-            return View(applicationUser);
+            return View(profilUser);
         }
 
         protected override void Dispose(bool disposing)

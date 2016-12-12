@@ -1,17 +1,24 @@
-﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+﻿@using Microsoft.AspNet.Identity
+@model PortalSpolecznosciowy.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Informacje o użytkowniku";
 }
-
+<br />
 <div class="row">
     <div class="col-md-3 col-md-offset-1">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Dane użytkownika
+            <div class="panel-heading clearfix">
+                <div class="pull-left">Użytkownik</div>
+                <div class="pull-right">@Html.ActionLink("Edytuj", "Edit", "ProfilUser", new { id = Model.Id }, null)</div>
             </div>
             <div class="panel-body text-center">
-                <h2>@Html.ActionLink(Model.UserName, "Edit", "ProfilUser", new {id = Model.Id}, null)</h2>
+                @if (!Model.Image.IsEmpty())
+                {
+                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + User.Identity.GetUserId() + "/" + Model.Image)" alt="Avatar użytkownika" height="200" width="200" />
+                }
+                
+                <h2>@Html.ActionLink(Model.FullName, "Edit", "ProfilUser", new { id = Model.Id }, null)</h2>
 
                 @if (Model.Sex == "m")
                 {
