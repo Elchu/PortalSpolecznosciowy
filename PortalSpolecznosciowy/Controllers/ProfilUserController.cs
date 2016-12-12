@@ -15,11 +15,10 @@ namespace PortalSpolecznosciowy.Controllers
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: ProfilUser/Details/5
         public ActionResult Show(string id)
         {
             var user = _db.Users.Find(User.Identity.GetUserId());
-            if (user == null || id.Equals(user.Id) == false )
+            if (user == null)
             {
                 return HttpNotFound();
             }
@@ -27,10 +26,10 @@ namespace PortalSpolecznosciowy.Controllers
         }
 
 
-        // GET: ProfilUser/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            var user = _db.Users.Find(User.Identity.GetUserId());
+            if (id == null || !id.Equals(user.Id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -42,17 +41,21 @@ namespace PortalSpolecznosciowy.Controllers
             return View(applicationUser);
         }
 
-        // POST: ProfilUser/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Sex,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,Sex,FullName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(applicationUser).State = EntityState.Modified;
-                _db.SaveChanges();
+                ApplicationUser user = _db.Users.Find(applicationUser.Id);
+
+                if (user != null)
+                {
+                    user.Sex = applicationUser.Sex;
+                    user.FullName = applicationUser.FullName;
+                    _db.SaveChanges();
+                }
+                    
                 return RedirectToAction("Index");
             }
             return View(applicationUser);

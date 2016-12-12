@@ -80,12 +80,13 @@ namespace PortalSpolecznosciowy.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
         [Display(Name = "Płeć")]
         public string Sex { get; set; }
 
         [Required]
         [Display(Name = "Nazwa użytkownika")]
-        public string UserName { get; set; }
+        public string FullName { get; set; }
     }
 
     public class ResetPasswordViewModel
