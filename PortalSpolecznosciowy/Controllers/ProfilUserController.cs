@@ -18,7 +18,7 @@ namespace PortalSpolecznosciowy.Controllers
 
         public ActionResult Show(string id)
         {
-            var user = _db.Users.Find(User.Identity.GetUserId());
+            var user = _db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();

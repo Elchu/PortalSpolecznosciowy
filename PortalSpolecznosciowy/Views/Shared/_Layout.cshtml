@@ -24,7 +24,23 @@
                     <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
                     <li>@Html.ActionLink("O nas", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    <li>
+                        @* wyszukiwarka *@
+                        @using (Html.BeginForm("UserSearch", "Search", FormMethod.Get))
+                        {
+                            <div class="input-group">
+                                <input type="text" name="searchUser" id="searchUser" class="form-control" placeholder="Search user">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div><!-- /input-group -->
+                        }
+                        @* koniec wyszukiwarki *@
+                    </li>
                 </ul>
+                
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
