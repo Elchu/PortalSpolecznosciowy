@@ -45,6 +45,7 @@ namespace PortalSpolecznosciowy.Models
         }
 
         public DbSet<Friend> Friend { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

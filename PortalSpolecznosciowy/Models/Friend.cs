@@ -14,12 +14,14 @@ namespace PortalSpolecznosciowy.Models
         [Display(Name = "Id")]
         public int FriendId { get; set; }
 
-        [Index("IX_UserId", 1, IsUnique = true)]
+        [Index(IsUnique = true)]
         [Display(Name = "Użytkownik")]
         public string UserId { get; set; }
 
-        [Index("IX_UserFriendId", 2, IsUnique = true)]
+        [Index(IsUnique = true)]
         [Display(Name = "Przyjaciel")]
+        [Column(TypeName = "NVARCHAR")]
+        [StringLength(128)]
         public string UserFriendId { get; set; }
 
         [DefaultValue (false)]
