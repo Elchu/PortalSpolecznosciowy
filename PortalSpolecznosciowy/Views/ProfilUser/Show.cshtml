@@ -20,7 +20,7 @@
             <div class="panel-body text-center">
                 @if (!Model.Image.IsEmpty())
                 {
-                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + User.Identity.GetUserId() + "/" + Model.Image)" alt="Avatar użytkownika" height="200" width="200" />
+                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" alt="Avatar użytkownika" height="200" width="200" />
                 }
 
                 <h2>

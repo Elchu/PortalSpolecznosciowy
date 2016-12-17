@@ -4,25 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PortalSpolecznosciowy.Models;
-
+using PagedList;
 namespace PortalSpolecznosciowy.Controllers
 {
     public class SearchController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        public ActionResult UserSearch(string searchUser)
+        public ActionResult UserSearch(string searchUser, int? page)
         {
             List<ApplicationUser> userList = _db.Users.ToList();
 
             if (!string.IsNullOrEmpty(searchUser))
+            {
                 userList = userList.Where(u => u.FullName.Contains(searchUser)).ToList();
+            }
 
-            return View(userList);
+            page = 1;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+
+            return View(userList.ToPagedList(pageNumber, pageSize));
+
         }
     }
 }

@@ -1,20 +1,33 @@
-﻿@using PortalSpolecznosciowy.Models
-@model IEnumerable<PortalSpolecznosciowy.Models.ApplicationUser>
+﻿@model PagedList.IPagedList<PortalSpolecznosciowy.Models.ApplicationUser>
+@using PagedList.Mvc;
+@using PortalSpolecznosciowy.Models
+<link href=@Url.Content("~/Content/PagedList.css") rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "User Search";
+    ViewBag.Title = "Wyniki wyszukiwania";
 }
-<br/>
+<br />
 <div class="row">
-    @foreach (ApplicationUser user in Model)
-    {
-        <div class="col-sm-3 text-center">
-            <a href="@Url.Action("Show", "ProfilUser", new {id = user.Id})">
-                <div class="thumbnail">
-                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + user.Id + "/" + user.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
-                    <h5>@user.FullName</h5>
+    <div class="panel panel-default">
+        <div class="panel-heading">Wyniki wyszukiwania</div>
+        <div class="panel-body">
+            @foreach (ApplicationUser user in Model)
+            {
+                <div class="col-sm-3 text-center">
+                    <a href="@Url.Action("Show", "ProfilUser", new {id = user.Id})">
+                        <div class="thumbnail">
+                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + user.Id + "/" + user.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                            <h5>@user.FullName</h5>
+                        </div>
+                    </a>
                 </div>
-            </a>
+            }
         </div>
-    }
+    </div>
 </div>
 
+<div class="row">
+    <div class="col-sm-12 text-center">
+        Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("UserSearch", new { page }))
+    </div>
+</div>
