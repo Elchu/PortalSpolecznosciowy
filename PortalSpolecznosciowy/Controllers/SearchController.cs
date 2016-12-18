@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PortalSpolecznosciowy.Models;
 using PagedList;
+
 namespace PortalSpolecznosciowy.Controllers
 {
     public class SearchController : Controller
@@ -17,7 +18,7 @@ namespace PortalSpolecznosciowy.Controllers
 
             if (!string.IsNullOrEmpty(searchUser))
             {
-                userList = userList.Where(u => u.FullName.Contains(searchUser)).ToList();
+                userList = userList.Where(u => u.FullName.ToLower().Contains(searchUser.ToLower())).ToList();
             }
 
             page = 1;

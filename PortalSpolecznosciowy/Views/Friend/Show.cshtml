@@ -57,14 +57,20 @@
                         }
                     }
 
-                    if (Model.IsFriend && Model.User.Id == User.Identity.GetUserId())
+                    if (Model.IsFriend == true && Model.IsAccept == false)
                     {
-                        using (Html.BeginForm("Accept", "Friend", FormMethod.Post))
+                        <button class="btn btn-info disabled">Zaproszenie wysłane</button>
+                    }
+
+                    if (Model.IsFriend && Model.IsAccept)
+                    {
+                        using (Html.BeginForm("DeleteFriend", "Friend", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("friendId", Model.User.Id)
-                            <button class="btn btn-success">Przyjmij zaproszenie</button>
+                            <button class="btn btn-danger">Usuń ze znajomych</button>
                         }
+
                     }
                 }
             </div>

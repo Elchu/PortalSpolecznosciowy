@@ -52,7 +52,17 @@
                     <p>Użytkownicy do zaakceptowania</p>
                     foreach (UserFriendTemp friend in Model.Friends)
                     {
-                        <button class="btn btn-primary">@friend.UserFullName</button>
+                        if (friend.IsAccepted == false)
+                        {
+
+                            using (Html.BeginForm("Accept", "Friend", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("friendId", friend.IdUser)
+                                <button class="btn btn-primary"><h6>Przyjmij zaproszenie od @friend.UserFullName</h6></button>
+                            }
+                        }
+
                     }
                 }
             </div>

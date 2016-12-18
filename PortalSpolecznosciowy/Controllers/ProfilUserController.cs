@@ -27,7 +27,6 @@ namespace PortalSpolecznosciowy.Controllers
                 return HttpNotFound();
             }
 
-            //IQueryable<Friend> friends = _db.Friend.Where(s => s.UserFriendId.Equals(id) && s.Accepted == false);
             var friends = (from f in _db.Friend
                 join u in _db.Users on f.UserFriendId equals u.Id
                 where f.UserFriendId == id && f.Accepted == false
@@ -35,7 +34,8 @@ namespace PortalSpolecznosciowy.Controllers
                 {
                     IdUser = f.User.Id,
                     UserFullName = f.User.FullName,
-                    UserFriendId = f.UserFriendId
+                    UserFriendId = f.UserFriendId,
+                    IsAccepted = f.Accepted
                 }
                 ).ToList();
 

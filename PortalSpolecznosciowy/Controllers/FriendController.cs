@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -86,7 +87,49 @@ namespace PortalSpolecznosciowy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Accept(string friendId)
         {
-            return View();
+            string userLoggedId = User.Identity.GetUserId();
+            var friend = _db.Friend.FirstOrDefault(f => f.UserFriendId == userLoggedId && f.UserId == friendId);
+
+            if (friend != null)
+            {
+                friend.Accepted = true;
+                _db.Entry(friend).State = EntityState.Modified;
+
+                try
+                {
+                    _db.SaveChanges();
+                    TempData["Message"] = "Znajmość z użytkownikiem została zawarta!!!";
+                }
+                catch (Exception)
+                {
+                    TempData["Message"] = "Wystąpił błąd podczas zawierania znajmości!!!";
+                }
+            }
+            return RedirectToAction("Show", "ProfilUser", new { id = userLoggedId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteFriend(string friendId)
+        {
+            string userLoggedId = User.Identity.GetUserId();
+            var friend = _db.Friend.FirstOrDefault(f => f.UserFriendId == userLoggedId && f.UserId == friendId);
+
+            if (friend != null)
+            {
+                _db.Friend.Remove(friend);
+
+                try
+                {
+                    _db.SaveChanges();
+                    TempData["Message"] = "Znajmość z użytkownikiem została usunięta!!!";
+                }
+                catch (Exception)
+                {
+                    TempData["Message"] = "Wystąpił błąd podczas usuwania znajmości!!!";
+                }
+            }
+            return RedirectToAction("Show", "ProfilUser", new {id = userLoggedId});
         }
     }
 }

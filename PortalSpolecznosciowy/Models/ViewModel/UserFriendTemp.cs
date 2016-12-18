@@ -10,6 +10,7 @@ namespace PortalSpolecznosciowy.Models.ViewModel
         public string IdUser { get; set; }
         public string UserFullName { get; set; }
         public string UserFriendId { get; set; }
+        public bool IsAccepted { get; set; }
 
     }
 }
