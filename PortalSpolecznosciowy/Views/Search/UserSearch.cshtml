@@ -13,7 +13,7 @@
             @foreach (ApplicationUser user in Model)
             {
                 <div class="col-sm-3 text-center">
-                    <a href="@Url.Action("Show", "ProfilUser", new {id = user.Id})">
+                    <a href="@Url.Action("Show", "Friend", new {id = user.Id})">
                         <div class="thumbnail">
                             <img src="@Url.Content("/Content/UploadUsersAvatars/" + user.Id + "/" + user.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
                             <h5>@user.FullName</h5>

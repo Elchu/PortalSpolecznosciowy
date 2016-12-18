@@ -14,11 +14,9 @@ namespace PortalSpolecznosciowy.Models
         [Display(Name = "Id")]
         public int FriendId { get; set; }
 
-        [Index(IsUnique = true)]
         [Display(Name = "Użytkownik")]
         public string UserId { get; set; }
 
-        [Index(IsUnique = true)]
         [Display(Name = "Przyjaciel")]
         [Column(TypeName = "NVARCHAR")]
         [StringLength(128)]

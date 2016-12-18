@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PortalSpolecznosciowy.Models;
+using PortalSpolecznosciowy.Models.ViewModel;
 
 namespace PortalSpolecznosciowy.Controllers
 {
@@ -18,12 +20,32 @@ namespace PortalSpolecznosciowy.Controllers
 
         public ActionResult Show(string id)
         {
-            var user = _db.Users.Find(id);
+            ApplicationUser user = _db.Users.Find(id);
+
             if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+
+            //IQueryable<Friend> friends = _db.Friend.Where(s => s.UserFriendId.Equals(id) && s.Accepted == false);
+            var friends = (from f in _db.Friend
+                join u in _db.Users on f.UserFriendId equals u.Id
+                where f.UserFriendId == id && f.Accepted == false
+                select new UserFriendTemp
+                {
+                    IdUser = f.User.Id,
+                    UserFullName = f.User.FullName,
+                    UserFriendId = f.UserFriendId
+                }
+                ).ToList();
+
+            UserFriendToAcceptedViewModel uf = new UserFriendToAcceptedViewModel()
+            {
+                User = user,
+                Friends = friends
+            };
+
+            return View(uf);
         }
 
 

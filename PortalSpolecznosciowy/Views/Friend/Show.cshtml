@@ -1,7 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using PortalSpolecznosciowy.Models
-@using PortalSpolecznosciowy.Models.ViewModel
-@model PortalSpolecznosciowy.Models.ViewModel.UserFriendToAcceptedViewModel
+@model PortalSpolecznosciowy.Models.ViewModel.UserFriendViewModel
 
 @{
     ViewBag.Title = "Informacje o użytkowniku";
@@ -47,12 +45,26 @@
                 }
                 <p>@Model.User.Email</p>
 
-                @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
+                @if (User.Identity.IsAuthenticated && Model.User.Id != User.Identity.GetUserId())
                 {
-                    <p>Użytkownicy do zaakceptowania</p>
-                    foreach (UserFriendTemp friend in Model.Friends)
+                    if (Model.IsFriend == false)
                     {
-                        <button class="btn btn-primary">@friend.UserFullName</button>
+                        using (Html.BeginForm("Add", "Friend", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("friendId", Model.User.Id)
+                            <button class="btn btn-success">Dodaj znajomego</button>
+                        }
+                    }
+
+                    if (Model.IsFriend && Model.User.Id == User.Identity.GetUserId())
+                    {
+                        using (Html.BeginForm("Accept", "Friend", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("friendId", Model.User.Id)
+                            <button class="btn btn-success">Przyjmij zaproszenie</button>
+                        }
                     }
                 }
             </div>

@@ -1,9 +1,12 @@
-﻿@model PortalSpolecznosciowy.Models.IndexViewModel
+﻿@using Microsoft.AspNet.Identity
+@model PortalSpolecznosciowy.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
 }
 
 <h2>@ViewBag.Title.</h2>
+
+<p>@Html.ActionLink("Zobacz swój profil", "Show", "ProfilUser", new {id = User.Identity.GetUserId()}, null)</p>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>

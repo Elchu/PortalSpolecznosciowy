@@ -205,6 +205,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfilUserController.cs" />
@@ -236,11 +237,18 @@
     <Compile Include="Migrations\201612171613020_addClassFriendAndRelationWhitUser.Designer.cs">
       <DependentUpon>201612171613020_addClassFriendAndRelationWhitUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612172227391_RemoveIndexWhitModelFriend.cs" />
+    <Compile Include="Migrations\201612172227391_RemoveIndexWhitModelFriend.Designer.cs">
+      <DependentUpon>201612172227391_RemoveIndexWhitModelFriend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
+    <Compile Include="Models\ViewModel\UserFriendToAcceptedViewModel.cs" />
+    <Compile Include="Models\ViewModel\UserFriendViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -306,6 +314,9 @@
     <Content Include="Views\ProfilUser\Edit.cshtml" />
     <Content Include="Views\ProfilUser\Show.cshtml" />
     <Content Include="Views\Search\UserSearch.cshtml" />
+    <Content Include="Views\Shared\_ShowProfil.cshtml" />
+    <Content Include="Views\Friend\Accept.cshtml" />
+    <Content Include="Views\Friend\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612171613020_addClassFriendAndRelationWhitUser.resx">
       <DependentUpon>201612171613020_addClassFriendAndRelationWhitUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612172227391_RemoveIndexWhitModelFriend.resx">
+      <DependentUpon>201612172227391_RemoveIndexWhitModelFriend.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
