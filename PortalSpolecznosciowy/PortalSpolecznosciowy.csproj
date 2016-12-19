@@ -244,6 +244,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Friend.cs" />
+    <Compile Include="Models\HelpersClass\UserFriends.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
@@ -317,6 +318,7 @@
     <Content Include="Views\Shared\_ShowProfil.cshtml" />
     <Content Include="Views\Friend\Accept.cshtml" />
     <Content Include="Views\Friend\Show.cshtml" />
+    <Content Include="Views\ProfilUser\ListOfFriends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

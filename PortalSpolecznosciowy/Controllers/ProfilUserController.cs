@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PortalSpolecznosciowy.Models;
+using PortalSpolecznosciowy.Models.HelpersClass;
 using PortalSpolecznosciowy.Models.ViewModel;
 
 namespace PortalSpolecznosciowy.Controllers
@@ -20,13 +21,15 @@ namespace PortalSpolecznosciowy.Controllers
 
         public ActionResult Show(string id)
         {
-            ApplicationUser user = _db.Users.Find(id);
+            string userLoggedId = id ?? User.Identity.GetUserId();
+            ApplicationUser user = _db.Users.Find(userLoggedId);
 
             if (user == null)
             {
                 return HttpNotFound();
             }
 
+            //sprawdzam i pobieram jacy uzytkownicy sa zaproszeni do znajomosci ale jeszcze nie zaakceptowanymi
             var friends = (from f in _db.Friend
                 join u in _db.Users on f.UserFriendId equals u.Id
                 where f.UserFriendId == id && f.Accepted == false
@@ -39,15 +42,31 @@ namespace PortalSpolecznosciowy.Controllers
                 }
                 ).ToList();
 
-            UserFriendToAcceptedViewModel uf = new UserFriendToAcceptedViewModel()
+            //pobieram wszystkich znajomych uzytkownika zalogowanego
+            UserFriends userFriends = new UserFriends();
+            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
+
+            //zbieram wszystkie potrzebne informacje do wyswieltenie w widoku
+            UserFriendToAcceptedViewModel userFriendsViewModel = new UserFriendToAcceptedViewModel()
             {
                 User = user,
-                Friends = friends
+                FriendsToAccepted = friends,
+                AllFriendsUser = friendUserAll
             };
 
-            return View(uf);
+            return View(userFriendsViewModel);
         }
 
+        public ActionResult ListOfFriends()
+        {
+            string loggedUserId = User.Identity.GetUserId();
+            
+            //pobieram wszystkich znajomych uzytkownika zalogowanego
+            UserFriends uf = new UserFriends();
+            IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(loggedUserId);
+
+            return View(friendUserAll);
+        }
 
         public ActionResult Edit(string id)
         {
@@ -112,7 +131,7 @@ namespace PortalSpolecznosciowy.Controllers
             }
             return View(profilUser);
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -49,12 +49,13 @@
 
                 @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
                 {
-                    <p>Użytkownicy do zaakceptowania</p>
-                    foreach (UserFriendTemp friend in Model.Friends)
+                    <p><a href="@Url.Action("ListOfFriends", "ProfilUser")" class="btn btn-xs btn-primary">Znajomych <span class="badge">@Model.AllFriendsUser.Count()</span></a></p>
+
+                    <p>Użytkownicy do zaakceptowania: </p>
+                    foreach (UserFriendTemp friend in Model.FriendsToAccepted)
                     {
                         if (friend.IsAccepted == false)
                         {
-
                             using (Html.BeginForm("Accept", "Friend", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()

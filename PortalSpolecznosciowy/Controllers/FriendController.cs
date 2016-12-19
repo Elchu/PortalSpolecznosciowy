@@ -51,6 +51,7 @@ namespace PortalSpolecznosciowy.Controllers
         { 
             string userLoggedId = User.Identity.GetUserId();
 
+            //sprawdzam czy znajomosc nie istnieje w bazie, jesli nie to mozemy dodac znajomosc
             var isFriend = _db.Friend.FirstOrDefault(
                 s =>
                     (s.UserFriendId.Equals(friendId) && s.UserId.Equals(userLoggedId)) ||
@@ -58,6 +59,7 @@ namespace PortalSpolecznosciowy.Controllers
 
             if (isFriend == null)
             {
+                //dodajemy znajomosc gdzie userId to zalogowany uzytkownik(zapraszajacy), a userFriend to osoba zaproszona
                 Friend newFriend = new Friend()
                 {
                     UserFriendId = friendId,
@@ -88,6 +90,7 @@ namespace PortalSpolecznosciowy.Controllers
         public ActionResult Accept(string friendId)
         {
             string userLoggedId = User.Identity.GetUserId();
+            //friendId to osoba ktora wyslala zaproszenie, userFriendId to osoba przyjmujaca zaproszenie
             var friend = _db.Friend.FirstOrDefault(f => f.UserFriendId == userLoggedId && f.UserId == friendId);
 
             if (friend != null)
@@ -113,7 +116,9 @@ namespace PortalSpolecznosciowy.Controllers
         public ActionResult DeleteFriend(string friendId)
         {
             string userLoggedId = User.Identity.GetUserId();
-            var friend = _db.Friend.FirstOrDefault(f => f.UserFriendId == userLoggedId && f.UserId == friendId);
+            var friend = _db.Friend.FirstOrDefault(
+                f => f.UserFriendId == userLoggedId && f.UserId == friendId && f.Accepted || 
+                f.UserFriendId == friendId && f.UserId == userLoggedId && f.Accepted);
 
             if (friend != null)
             {
