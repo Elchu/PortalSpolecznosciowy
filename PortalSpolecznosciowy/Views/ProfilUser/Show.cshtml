@@ -77,8 +77,67 @@
                 {
                     <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
                 }
-                <p>Velit mollis odio sollicitudin lacinia aliquam posuere, sapien elementum lobortis tincidunt, turpis dui ornare nisl, sollicitudin interdum turpis nunc eget sem nulla eu ultricies orci praesent id augue nec lorem pretium congue sit amet ac nunc fusce iaculis lorem eu diam hendrerit at mattis purus dignissim vivamus mauris tellus, fringilla vel dapibus a, blandit quis erat vivamus elementum aliquam luctus etiam fringilla pretium sem vitae sodales mauris id nulla est praesent laoreet, metus vel auctor aliquam, eros purus vulputate leo, eget consequat neque quam id tellus duis ultricies tempor tortor, vitae dignissim ligula mattis nec in hac habitasse platea dictumst.</p>
+
+                @using (Html.BeginForm("AddPost", "Post", FormMethod.Post, htmlAttributes: new {id = "addPost"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("userId", Model.User.Id)
+                    @Html.TextArea("Content", htmlAttributes: new { @class = "form-control", rows = 5, cols = 60, placeholder = "Co słychać?" })
+                    @Html.ValidationMessage("Content", "", new { @class = "text-danger" })
+                    <button type="submit" class="btn btn-default pull-right">Dodaj wpis</button>
+                }
             </div>
         </div>
+
+        @if (Model.User.Post.Count > 0)
+        {
+            foreach (Post post in Model.User.Post)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
+                        {
+                            <div class="dropdown pull-right">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="@Url.Content("/ProfilUser/Edit/" + Model.User.Id)">Edytuj</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("/ProfilUser/Delete/" + Model.User.Id)">Usuń</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        } @*end if*@
+
+                        <div class="clearfix">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <a href="@Url.Content("/ProfilUser/Show/" + Model.User.Id)">
+                                        <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="media-heading">
+                                        @Html.ActionLink(Model.User.FullName, "Show", "ProfilUser", new { id = Model.User.Id }, null)
+                                        Data dodania: <small><span class="glyphicon glyphicon-time"></span> @post.Date </small>
+                                    </p>
+                                    <div id="post_@post.PostId">
+                                        @post.Content
+                                    </div>
+                                </div>
+                            </div>
+                        </div>@*clearfix*@
+                    </div>@*panel-body*@
+                </div>@*panel panel-default*@
+            }/*end foreach*/
+        }@*end if*@
     </div>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

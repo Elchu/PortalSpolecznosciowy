@@ -23,6 +23,7 @@ namespace PortalSpolecznosciowy.Models
         public string Image { get; set; }
 
         public virtual ICollection<Friend> Friend { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -45,6 +46,7 @@ namespace PortalSpolecznosciowy.Models
         }
 
         public DbSet<Friend> Friend { get; set; }
+        public DbSet<Post> Post { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,11 +54,17 @@ namespace PortalSpolecznosciowy.Models
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
 
-            //one-to-many 
+            //one-to-many user-friends
             modelBuilder.Entity<Friend>()
                         .HasRequired<ApplicationUser>(s => s.User)
                         .WithMany(s => s.Friend)
                         .HasForeignKey(s => s.UserId);
+
+            //one-to-many user-posts
+            modelBuilder.Entity<Post>()
+            .HasRequired<ApplicationUser>(s => s.User)
+            .WithMany(s => s.Post)
+            .HasForeignKey(s => s.UserId);
         }
 
     }

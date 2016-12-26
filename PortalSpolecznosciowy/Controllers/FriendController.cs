@@ -34,9 +34,8 @@ namespace PortalSpolecznosciowy.Controllers
                     (s.UserFriendId.Equals(id) && s.UserId.Equals(userLoggedId)) ||
                     (s.UserFriendId.Equals(userLoggedId) && s.UserId.Equals(id)));
 
-            //pobieram wszystkich znajomych uzytkownika zalogowanego
+            //pobieram wszystkich znajomych uzytkownika
             UserFriends userFriends = new UserFriends();
-            //IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
             IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(id);
 
             UserFriendViewModel uf = new UserFriendViewModel()

@@ -208,6 +208,7 @@
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfilUserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -241,12 +242,17 @@
     <Compile Include="Migrations\201612172227391_RemoveIndexWhitModelFriend.Designer.cs">
       <DependentUpon>201612172227391_RemoveIndexWhitModelFriend.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612261639449_addModelPost.cs" />
+    <Compile Include="Migrations\201612261639449_addModelPost.Designer.cs">
+      <DependentUpon>201612261639449_addModelPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\HelpersClass\UserFriends.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
     <Compile Include="Models\ViewModel\UserFriendToAcceptedViewModel.cs" />
     <Compile Include="Models\ViewModel\UserFriendViewModel.cs" />
@@ -256,6 +262,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MyStyle.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -267,8 +274,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -320,11 +332,11 @@
     <Content Include="Views\Friend\Show.cshtml" />
     <Content Include="Views\ProfilUser\ListOfFriends.cshtml" />
     <Content Include="Views\Friend\ListOfFriends.cshtml" />
-    <Content Include="Views\ProfilUser\ShowFriend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\UploadUsersAvatars\" />
+    <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -332,7 +344,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612111229175_InitialCreate.resx">
@@ -355,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612172227391_RemoveIndexWhitModelFriend.resx">
       <DependentUpon>201612172227391_RemoveIndexWhitModelFriend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612261639449_addModelPost.resx">
+      <DependentUpon>201612261639449_addModelPost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

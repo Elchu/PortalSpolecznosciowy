@@ -21,10 +21,10 @@ namespace PortalSpolecznosciowy.Controllers
 
         public ActionResult Show(string id)
         {
-            string userLoggedId = id ?? User.Identity.GetUserId();
-            ApplicationUser user = _db.Users.Find(userLoggedId);
+            string userLoggedId = User.Identity.GetUserId();
+            ApplicationUser user = _db.Users.Find(id);
 
-            if (user == null)
+            if (user == null || userLoggedId.Equals(id) == false)
             {
                 return HttpNotFound();
             }
@@ -44,7 +44,7 @@ namespace PortalSpolecznosciowy.Controllers
 
             //pobieram wszystkich znajomych uzytkownika zalogowanego
             UserFriends userFriends = new UserFriends();
-            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
+            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(user.Id);
 
             //zbieram wszystkie potrzebne informacje do wyswieltenie w widoku
             UserFriendToAcceptedViewModel userFriendsViewModel = new UserFriendToAcceptedViewModel()
@@ -66,35 +66,6 @@ namespace PortalSpolecznosciowy.Controllers
             IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(loggedUserId);
 
             return View(friendUserAll);
-        }
-
-        public ActionResult ShowFriend(string id)
-        {
-            ApplicationUser user = _db.Users.Find(id);
-            string userLoggedId = User.Identity.GetUserId();
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-
-            var isFriend = _db.Friend.FirstOrDefault(
-                s =>
-                    (s.UserFriendId.Equals(id) && s.UserId.Equals(userLoggedId)) ||
-                    (s.UserFriendId.Equals(userLoggedId) && s.UserId.Equals(id)));
-
-            //pobieram wszystkich znajomych uzytkownika zalogowanego
-            UserFriends userFriends = new UserFriends();
-            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
-
-            UserFriendViewModel uf = new UserFriendViewModel()
-            {
-                User = user,
-                IsFriend = isFriend != null ? true : false,
-                IsAccept = isFriend != null ? isFriend.Accepted : false,
-                AllFriendsUser = friendUserAll
-            };
-
-            return View("ShowFriend", uf);
         }
 
         public ActionResult Edit(string id)
