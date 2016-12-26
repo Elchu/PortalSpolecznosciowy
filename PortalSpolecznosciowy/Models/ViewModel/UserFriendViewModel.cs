@@ -10,5 +10,6 @@ namespace PortalSpolecznosciowy.Models.ViewModel
         public ApplicationUser User { get; set; }
         public bool IsFriend { get; set; }
         public bool IsAccept { get; set; }
+        public IEnumerable<ApplicationUser> AllFriendsUser { get; set; }
     }
 }

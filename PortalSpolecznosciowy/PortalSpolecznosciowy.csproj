@@ -319,6 +319,8 @@
     <Content Include="Views\Friend\Accept.cshtml" />
     <Content Include="Views\Friend\Show.cshtml" />
     <Content Include="Views\ProfilUser\ListOfFriends.cshtml" />
+    <Content Include="Views\Friend\ListOfFriends.cshtml" />
+    <Content Include="Views\ProfilUser\ShowFriend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

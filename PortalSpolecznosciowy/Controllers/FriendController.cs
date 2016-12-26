@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PortalSpolecznosciowy.Models;
+using PortalSpolecznosciowy.Models.HelpersClass;
 using PortalSpolecznosciowy.Models.ViewModel;
 
 namespace PortalSpolecznosciowy.Controllers
@@ -33,12 +34,17 @@ namespace PortalSpolecznosciowy.Controllers
                     (s.UserFriendId.Equals(id) && s.UserId.Equals(userLoggedId)) ||
                     (s.UserFriendId.Equals(userLoggedId) && s.UserId.Equals(id)));
 
+            //pobieram wszystkich znajomych uzytkownika zalogowanego
+            UserFriends userFriends = new UserFriends();
+            //IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
+            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(id);
+
             UserFriendViewModel uf = new UserFriendViewModel()
             {
                 User = user,
                 IsFriend = isFriend != null ? true : false,
-                IsAccept = isFriend != null ? isFriend.Accepted : false
-
+                IsAccept = isFriend != null ? isFriend.Accepted : false,
+                AllFriendsUser = friendUserAll
             };
 
             return View("Show", uf);
@@ -135,6 +141,18 @@ namespace PortalSpolecznosciowy.Controllers
                 }
             }
             return RedirectToAction("Show", "ProfilUser", new {id = userLoggedId});
+        }
+
+        public ActionResult ListOfFriends(string id)
+        {
+            //id osoby szukajacej znajomych
+            string loggedUserId = id;
+
+            //pobieram wszystkich znajomych uzytkownika
+            UserFriends uf = new UserFriends();
+            IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(loggedUserId);
+
+            return View(friendUserAll);
         }
     }
 }

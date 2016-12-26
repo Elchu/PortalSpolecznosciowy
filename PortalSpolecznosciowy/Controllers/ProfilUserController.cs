@@ -68,6 +68,35 @@ namespace PortalSpolecznosciowy.Controllers
             return View(friendUserAll);
         }
 
+        public ActionResult ShowFriend(string id)
+        {
+            ApplicationUser user = _db.Users.Find(id);
+            string userLoggedId = User.Identity.GetUserId();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var isFriend = _db.Friend.FirstOrDefault(
+                s =>
+                    (s.UserFriendId.Equals(id) && s.UserId.Equals(userLoggedId)) ||
+                    (s.UserFriendId.Equals(userLoggedId) && s.UserId.Equals(id)));
+
+            //pobieram wszystkich znajomych uzytkownika zalogowanego
+            UserFriends userFriends = new UserFriends();
+            IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(userLoggedId);
+
+            UserFriendViewModel uf = new UserFriendViewModel()
+            {
+                User = user,
+                IsFriend = isFriend != null ? true : false,
+                IsAccept = isFriend != null ? isFriend.Accepted : false,
+                AllFriendsUser = friendUserAll
+            };
+
+            return View("ShowFriend", uf);
+        }
+
         public ActionResult Edit(string id)
         {
             var user = _db.Users.Find(User.Identity.GetUserId());
