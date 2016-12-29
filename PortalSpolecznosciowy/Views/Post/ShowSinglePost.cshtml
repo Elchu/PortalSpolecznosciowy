@@ -1,0 +1,30 @@
+﻿@model PortalSpolecznosciowy.Models.ViewModel.SinglePostUser
+
+@{
+    ViewBag.Title = "Show Post";
+}
+
+<div class="row showSinglePost">
+    <div class="col-lg-8 col-lg-offset-2">
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="clearfix">
+                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
+                    <div class="pull-left" style="margin: 3px 10px;">
+                        <a href="@Url.Content("~/ProfilUser/Show/" + Model.User.Id)"><strong>@Model.User.FullName</strong></a><br>
+                        <a href="@Url.Content("~/Post/ShowSinglePost/" + @Model.Post.PostId)" class="text-muted"><small><span class="glyphicon glyphicon-time"></span>@Model.Post.Date}</small></a>
+                    </div>
+                </div>
+
+                <div id="post_@Model.Post.PostId" class="showSinglePostContent">
+                    @Model.Post.Content
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

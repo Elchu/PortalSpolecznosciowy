@@ -2,3 +2,11 @@
     width: 600px;
     margin-bottom: 10px;
 }
+
+.showSinglePost {
+    margin-top: 10px;
+}
+
+.showSinglePostContent {
+    padding-top: 10px;
+}

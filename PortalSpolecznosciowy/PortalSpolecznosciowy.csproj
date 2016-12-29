@@ -253,6 +253,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\ViewModel\SinglePostUser.cs" />
     <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
     <Compile Include="Models\ViewModel\UserFriendToAcceptedViewModel.cs" />
     <Compile Include="Models\ViewModel\UserFriendViewModel.cs" />
@@ -332,11 +333,11 @@
     <Content Include="Views\Friend\Show.cshtml" />
     <Content Include="Views\ProfilUser\ListOfFriends.cshtml" />
     <Content Include="Views\Friend\ListOfFriends.cshtml" />
+    <Content Include="Views\Post\ShowSinglePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\UploadUsersAvatars\" />
-    <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

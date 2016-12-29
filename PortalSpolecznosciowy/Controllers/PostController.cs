@@ -14,9 +14,9 @@ namespace PortalSpolecznosciowy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPost(string userId, string Content)
+        public ActionResult AddPost(string userId, string content)
         {
-            if (string.IsNullOrEmpty(Content))
+            if (string.IsNullOrEmpty(content))
                 ModelState.AddModelError("Content", "Dodaj tekst do wiadomości");
 
 
@@ -24,7 +24,7 @@ namespace PortalSpolecznosciowy.Controllers
             {
                 Post newPost = new Post()
                 {
-                    Content = Content,
+                    Content = content,
                     Date = DateTime.Now,
                     UserId = userId
                 };
@@ -47,7 +47,19 @@ namespace PortalSpolecznosciowy.Controllers
 
         public ActionResult ShowSinglePost(int id)
         {
-            return View();
+            Post post = _db.Post.FirstOrDefault(p => p.PostId == id);
+            ApplicationUser user = _db.Users.FirstOrDefault(u => u.Id == post.UserId);
+
+            if (post == null || user == null)
+                return HttpNotFound();
+
+            SinglePostUser singlePostUser = new SinglePostUser()
+            {
+                Post = post,
+                User = user
+            };
+
+            return View(singlePostUser);
         }
     }
 }
