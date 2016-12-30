@@ -100,5 +100,32 @@ namespace PortalSpolecznosciowy.Controllers
             }
             return View(post);
         }
+
+        [HttpPost]
+        public string Delete(int id)
+        {
+           if(Request.IsAjaxRequest())
+            {
+                Post post = _db.Post.FirstOrDefault(p => p.PostId == id);
+
+                if (post == null)
+                    return "Taki wpis nieistnieje w bazie danych";
+
+                post.IsDeleted = true;
+                _db.Entry(post).State = EntityState.Modified;
+
+                try
+                {
+                    _db.SaveChanges();
+                    return "Wpis został pomyślnie usunięty";
+                }
+                catch (Exception)
+                {
+                    return "Wystąpił błąd podczas usuwania wpisu";
+                }
+            }
+
+            return "Wystąpił błąd podczas usuwania wpisu";
+        }
     }
 }

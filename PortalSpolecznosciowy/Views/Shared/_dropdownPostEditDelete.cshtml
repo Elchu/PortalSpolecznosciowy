@@ -1,0 +1,24 @@
+﻿@model PortalSpolecznosciowy.Models.Post
+<div class="dropdown pull-right">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="@Url.Content("/Post/Edit/" + Model.PostId)" class="btn btn-link">Edit</a>
+        </li>
+        <li>
+            @using (Ajax.BeginForm(new AjaxOptions()
+            {
+                HttpMethod = "Post",
+                Url = Url.Action("Delete", "Post", new { id = Model.PostId }),
+                Confirm = "Czy na pewno chcesz usunąć wpis?",
+                OnComplete = "OnComplete",
+                OnFailure = "OnFailure"
+            }))
+            {
+                <input type=submit value="Delete" class="btn btn-default postBtnDelete" />
+            }
+        </li>
+    </ul>
+</div>

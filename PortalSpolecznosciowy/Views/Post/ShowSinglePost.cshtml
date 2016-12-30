@@ -39,10 +39,9 @@
                         }
                         else
                         {
-                            <strong>@Model.User.FullName</strong>
-                            <br/>
+                            <strong>@Html.ActionLink(Model.User.FullName, "Show", "Friend", new { id = Model.User.Id }, null)</strong><br/>
                         }
-                        Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + @Model.Post.PostId)" class="text-muted"> <small><span class="glyphicon glyphicon-time"></span> @Model.Post.Date</small></a>
+                        Data dodania: <small><span class="glyphicon glyphicon-time"></span> @Model.Post.Date</small>
                     </div>
                 </div>
 

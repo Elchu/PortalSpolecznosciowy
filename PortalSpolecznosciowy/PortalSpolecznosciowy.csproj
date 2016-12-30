@@ -283,6 +283,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -335,6 +337,7 @@
     <Content Include="Views\Friend\ListOfFriends.cshtml" />
     <Content Include="Views\Post\ShowSinglePost.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Shared\_dropdownPostEditDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

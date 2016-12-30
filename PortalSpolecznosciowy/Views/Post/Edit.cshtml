@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @model PortalSpolecznosciowy.Models.Post
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit entry";
 }
 
 <div class="row showSinglePost">
@@ -13,20 +13,8 @@
 
                 @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
                 {
-                    <div class="dropdown pull-right">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="@Url.Content("/Post/Edit/" + Model.PostId)">Edytuj</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Content("/Post/Delete/" + Model.PostId)">Usuń</a>
-                            </li>
-                        </ul>
-                    </div>
-                } @*end if*@
+                    Html.RenderPartial("_dropdownPostEditDelete", @Model);
+                }
 
                 <div class="clearfix">
                     <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
@@ -50,11 +38,11 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
-                        @Html.HiddenFor(model=>model.PostId)
-                        @Html.HiddenFor(model=>model.UserId)
-                        @Html.TextAreaFor(model=>model.Content, 5, 60, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model=>model.Content, "", new { @class = "text-danger" })
-                        <button type="submit" class="btn btn-default pull-right">Zapisz</button>
+                        @Html.HiddenFor(model => model.PostId)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.TextAreaFor(model => model.Content, 5, 60, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        <button type="submit" class="btn btn-default pull-right">Save</button>
                     }
                 </div>
 
@@ -66,4 +54,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        
+        function OnComplete() {
+            alert("Wpis został pomyślnie usunięty.");
+        }
+
+        function OnFailure() {
+            alert("Wystąpił błąd podczas usuwania wpisu.");
+        }
+
+    </script>
+
 }
