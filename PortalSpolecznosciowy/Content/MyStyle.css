@@ -1,8 +1,14 @@
-﻿#addPost textarea#Content {
-    width: 600px;
+﻿#addPost textarea, #editPost textarea {
+    max-width: 600px;
     margin-bottom: 10px;
 }
 
+#editPost textarea {
+    max-width: 700px;
+    margin-bottom: 10px;
+}
+
+/*===== POST =====*/
 .showSinglePost {
     margin-top: 10px;
 }
@@ -10,3 +16,9 @@
 .showSinglePostContent {
     padding-top: 10px;
 }
+
+.showSinglePostAuthor {
+    margin: 3px 10px;
+}
+
+/*===== END POST =====*/

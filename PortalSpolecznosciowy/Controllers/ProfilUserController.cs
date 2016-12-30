@@ -24,7 +24,7 @@ namespace PortalSpolecznosciowy.Controllers
             string userLoggedId = User.Identity.GetUserId();
             ApplicationUser user = _db.Users.Find(id);
 
-            if (user == null || userLoggedId.Equals(id) == false)
+            if (user == null || userLoggedId == null)
             {
                 return HttpNotFound();
             }

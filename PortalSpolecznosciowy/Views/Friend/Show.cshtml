@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using PortalSpolecznosciowy.Models
 @model PortalSpolecznosciowy.Models.ViewModel.UserFriendViewModel
 
 @{
@@ -33,7 +34,7 @@
                     {
                         @Model.User.FullName
                     }
-                    
+
                 </h2>
 
                 @if (Model.User.Sex == "m")
@@ -81,14 +82,45 @@
     </div>
 
     <div class="col-md-7">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                @if (TempData["Message"] != null)
-                {
+        @if (TempData["Message"] != null)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
-                }
-                <p>Velit mollis odio sollicitudin lacinia aliquam posuere, sapien elementum lobortis tincidunt, turpis dui ornare nisl, sollicitudin interdum turpis nunc eget sem nulla eu ultricies orci praesent id augue nec lorem pretium congue sit amet ac nunc fusce iaculis lorem eu diam hendrerit at mattis purus dignissim vivamus mauris tellus, fringilla vel dapibus a, blandit quis erat vivamus elementum aliquam luctus etiam fringilla pretium sem vitae sodales mauris id nulla est praesent laoreet, metus vel auctor aliquam, eros purus vulputate leo, eget consequat neque quam id tellus duis ultricies tempor tortor, vitae dignissim ligula mattis nec in hac habitasse platea dictumst.</p>
+                </div>
             </div>
-        </div>
+        }
+
+        @if (Model.User.Post.Count > 0)
+        {
+            foreach (Post post in Model.User.Post)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <a href="@Url.Content("/ProfilUser/Show/" + Model.User.Id)">
+                                        <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="media-heading">
+                                        <b>@Model.User.FullName</b>
+                                    </p>
+                                    <p class="media-heading">
+                                        Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + post.PostId)"><small><span class="glyphicon glyphicon-time"></span> @post.Date </small></a>
+                                    </p>
+                                    <div id="post_@post.PostId">
+                                        @post.Content
+                                    </div>
+                                </div>
+                            </div>
+                        </div>@*clearfix*@
+                    </div>@*panel-body*@
+                </div>@*panel panel-default*@
+            }/*end foreach*/
+        }@*end if*@
+
     </div>
 </div>

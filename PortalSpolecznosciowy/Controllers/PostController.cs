@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PortalSpolecznosciowy.Models;
 using PortalSpolecznosciowy.Models.ViewModel;
 
@@ -44,7 +46,11 @@ namespace PortalSpolecznosciowy.Controllers
 
             return RedirectToAction("Show", "ProfilUser", new { id = userId });
         }
-
+        /// <summary>
+        /// Show post
+        /// </summary>
+        /// <param name="id">ID display post</param>
+        /// <returns></returns>
         public ActionResult ShowSinglePost(int id)
         {
             Post post = _db.Post.FirstOrDefault(p => p.PostId == id);
@@ -60,6 +66,39 @@ namespace PortalSpolecznosciowy.Controllers
             };
 
             return View(singlePostUser);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Post editPost = _db.Post.FirstOrDefault(p => p.PostId == id);
+
+            if (editPost == null || User.Identity.GetUserId() != editPost.UserId)
+                return HttpNotFound();
+
+            return View(editPost);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Post post)
+        {
+            if (!_db.Post.Any(p=>p.PostId == post.PostId))
+                return HttpNotFound();
+
+            post.Date = DateTime.Now;
+            _db.Entry(post).State = EntityState.Modified;
+
+            try
+            {
+                _db.SaveChanges();
+                return RedirectToAction("Show", "ProfilUser", new {id = post.UserId });
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Wystąpił błąd podczas edytowania. Sprubój później");
+            }
+            return View(post);
         }
     }
 }

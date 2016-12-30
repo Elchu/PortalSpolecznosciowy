@@ -334,6 +334,7 @@
     <Content Include="Views\ProfilUser\ListOfFriends.cshtml" />
     <Content Include="Views\Friend\ListOfFriends.cshtml" />
     <Content Include="Views\Post\ShowSinglePost.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
