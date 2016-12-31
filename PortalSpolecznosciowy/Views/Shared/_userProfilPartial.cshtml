@@ -1,0 +1,45 @@
+﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+
+<div class="panel panel-default">
+
+    <div class="panel-heading clearfix">
+        <div class="pull-left">Użytkownik</div>
+        <div class="pull-right">
+            @if (User.Identity.IsAuthenticated && User.Identity.GetUserId().Equals(Model.Id))
+            {
+                @Html.ActionLink("Edytuj", "Edit", "ProfilUser", new { id = Model.Id }, null)
+            }
+        </div>
+    </div>
+
+    <div class="panel-body text-center">
+
+        @if (!Model.Image.IsEmpty())
+            {
+            <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" alt="Avatar użytkownika" height="200" width="200" />
+        }
+
+        <h2>
+            @if (User.Identity.IsAuthenticated && User.Identity.GetUserId().Equals(Model.Id))
+            {
+                @Html.ActionLink(Model.FullName, "Show", "ProfilUser", new { id = Model.Id }, null)
+            }
+            else
+            {
+                @Model.FullName
+            }
+        </h2>
+
+        @if (Model.Sex == "m")
+            {
+            <p>Mężczyzna</p>
+        }
+        else
+        {
+            <p>Kobieta</p>
+        }
+        <p>@Model.Email</p>
+
+    </div>
+</div>@* PROFIL UZYTKOWNIKA panel panel-default*@

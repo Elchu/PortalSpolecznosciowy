@@ -211,6 +211,7 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfilUserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\WallController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -338,6 +339,10 @@
     <Content Include="Views\Post\ShowSinglePost.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Shared\_dropdownPostEditDelete.cshtml" />
+    <Content Include="Views\Shared\_displayPostUser.cshtml" />
+    <Content Include="Views\Wall\Index.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
+    <Content Include="Views\Shared\_userProfilPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -94,7 +94,7 @@ namespace PortalSpolecznosciowy.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Show", "ProfilUser", new {id = post.UserId });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("", "Wystąpił błąd podczas edytowania. Sprubój później");
             }

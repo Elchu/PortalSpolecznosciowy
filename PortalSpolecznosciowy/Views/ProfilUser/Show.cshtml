@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-3 col-md-offset-1">
         <div class="panel panel-default">
+
             <div class="panel-heading clearfix">
                 <div class="pull-left">Użytkownik</div>
                 <div class="pull-right">
@@ -19,17 +20,18 @@
                     }
                 </div>
             </div>
+
             <div class="panel-body text-center">
 
                 @if (!Model.User.Image.IsEmpty())
-                {
+            {
                     <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" alt="Avatar użytkownika" height="200" width="200" />
                 }
 
                 <h2>
                     @if (User.Identity.IsAuthenticated && User.Identity.GetUserId().Equals(Model.User.Id))
                     {
-                        @Html.ActionLink(Model.User.FullName, "Edit", "ProfilUser", new { id = Model.User.Id }, null)
+                        @Html.ActionLink(Model.User.FullName, "Show", "ProfilUser", new { id = Model.User.Id }, null)
                     }
                     else
                     {
@@ -38,7 +40,7 @@
                 </h2>
 
                 @if (Model.User.Sex == "m")
-                {
+            {
                     <p>Mężczyzna</p>
                 }
                 else
@@ -47,12 +49,20 @@
                 }
                 <p>@Model.User.Email</p>
 
-                <p><a href="@Url.Action("ListOfFriends", "ProfilUser")" class="btn btn-xs btn-primary">Znajomych <span class="badge">@Model.AllFriendsUser.Count()</span></a></p>
+                <p>
+                    <a href="@Url.Action("ListOfFriends", "ProfilUser")" class="btn btn-xs btn-primary">Znajomych <span class="badge">@Model.AllFriendsUser.Count()</span></a>
+                </p>
+                
 
-                @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
-                {
+            </div>
+        </div>@* PROFIL UZYTKOWNIKA panel panel-default*@
+
+            @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId() && Model.FriendsToAccepted.Any(a=>a.IsAccepted == false))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
                     <p>Użytkownicy do zaakceptowania: </p>
-                    foreach (UserFriendTemp friend in Model.FriendsToAccepted)
+                    @foreach (UserFriendTemp friend in Model.FriendsToAccepted)
                     {
                         if (friend.IsAccepted == false)
                         {
@@ -65,10 +75,12 @@
                         }
 
                     }
-                }
-            </div>
-        </div>
-    </div>
+                    </div>
+                </div>@* UZYTKOWNICY DO ZAAKCEPTOWANIA panel panel-default*@
+            }
+
+
+    </div>@*col-md-3 col-md-offset-1*@
 
     <div class="col-md-7">
         <div class="panel panel-default">
@@ -89,45 +101,8 @@
             </div>
         </div>
 
-        @if (Model.User.Post.Count > 0)
-        {
-            foreach (Post post in Model.User.Post)
-            {
-                if (!post.IsDeleted)
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
-                            {
-                                Html.RenderPartial("_dropdownPostEditDelete", post);
-                            }
+        @Html.Partial("_displayPostUser", Model.User)
 
-                            <div class="clearfix">
-                                <div class="media">
-                                    <div class="media-left media-middle">
-                                        <a href="@Url.Content("/ProfilUser/Show/" + Model.User.Id)">
-                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading">
-                                            @Html.ActionLink(Model.User.FullName, "Show", "ProfilUser", new { id = Model.User.Id }, null)
-                                        </p>
-                                        <p class="media-heading">
-                                            Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + post.PostId)"><small><span class="glyphicon glyphicon-time"></span> @post.Date </small></a>
-                                        </p>
-                                        <div id="post_@post.PostId">
-                                            @post.Content
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>@*clearfix*@
-                        </div>@*panel-body*@
-                    </div>@*panel panel-default*@
-                }/*if post isdelete*/
-
-            }/*end foreach*/
-        }@*end if*@
     </div>
 </div>
 
@@ -135,7 +110,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
         function OnComplete() {
             alert("Wpis został pomyślnie usunięty.");
@@ -144,5 +119,5 @@
         function OnFailure() {
             alert("Wystąpił błąd podczas usuwania wpisu.");
         }
-</script>
+    </script>
 }
