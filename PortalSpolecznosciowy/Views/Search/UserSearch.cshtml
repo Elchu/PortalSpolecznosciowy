@@ -1,7 +1,11 @@
 ﻿@model PagedList.IPagedList<PortalSpolecznosciowy.Models.ApplicationUser>
 @using PagedList.Mvc;
 @using PortalSpolecznosciowy.Models
-<link href=@Url.Content("~/Content/PagedList.css") rel="stylesheet" type="text/css" />
+
+@section Styles {
+    <link href=@Url.Content("~/Content/PagedList.css") rel="stylesheet" type="text/css" />
+}
+
 @{
     ViewBag.Title = "Wyniki wyszukiwania";
 }

@@ -1,7 +1,12 @@
-﻿@model IEnumerable<PortalSpolecznosciowy.Models.Post>
+﻿@model PagedList.IPagedList<PortalSpolecznosciowy.Models.Post>
+@using PagedList.Mvc;
+@*@model IEnumerable<PortalSpolecznosciowy.Models.Post>*@
 @using Microsoft.AspNet.Identity
 @using PortalSpolecznosciowy.Models
 
+@section Styles {
+    <link href=@Url.Content("~/Content/PagedList.css") rel="stylesheet" type="text/css" />
+}
 
 @{
     ViewBag.Title = "Wpisy przyjaciół";
@@ -15,9 +20,14 @@
     </div>
 
     <div class="col-md-7">
-        @Html.Partial("_formAddedPostPartial", (ApplicationUser)ViewBag.User)
+        @Html.Partial("_formAddedPostPartial", (ApplicationUser) ViewBag.User)
 
         @Html.Partial("_displayPostPartial", Model)
 
+        <div class="col-md-7 text-center">
+            Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
     </div>
+
 </div>

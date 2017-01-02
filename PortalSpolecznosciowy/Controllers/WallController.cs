@@ -14,7 +14,7 @@ namespace PortalSpolecznosciowy.Controllers
     public class WallController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
@@ -35,7 +35,10 @@ namespace PortalSpolecznosciowy.Controllers
             IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post);
             ViewBag.User = userLogged;
 
-            return View(listaPost);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+
+            return View(listaPost.ToPagedList(pageNumber, pageSize));
         }
     }
 }

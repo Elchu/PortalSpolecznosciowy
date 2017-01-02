@@ -21,8 +21,7 @@ namespace PortalSpolecznosciowy.Controllers
                 userList = userList.Where(u => u.FullName.ToLower().Contains(searchUser.ToLower())).ToList();
             }
 
-            page = 1;
-            int pageSize = 4;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
 
             return View(userList.ToPagedList(pageNumber, pageSize));
