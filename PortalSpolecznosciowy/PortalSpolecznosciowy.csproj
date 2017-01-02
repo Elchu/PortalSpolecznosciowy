@@ -339,10 +339,11 @@
     <Content Include="Views\Post\ShowSinglePost.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Shared\_dropdownPostEditDelete.cshtml" />
-    <Content Include="Views\Shared\_displayPostUser.cshtml" />
     <Content Include="Views\Wall\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Shared\_userProfilPartial.cshtml" />
+    <Content Include="Views\Shared\_displayPostPartial.cshtml" />
+    <Content Include="Views\Shared\_formAddedPostPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

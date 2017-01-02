@@ -1,17 +1,17 @@
-﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+﻿@model IEnumerable<PortalSpolecznosciowy.Models.Post>
 @using Microsoft.AspNet.Identity
 @using PortalSpolecznosciowy.Models
 
 
-@if (Model.Post.Count > 0)
+@if (Model.Any())
 {
-    foreach (Post post in Model.Post.OrderBy(d=>d.Date))
+    foreach (Post post in Model.OrderByDescending(d => d.Date))
     {
         if (!post.IsDeleted)
         {
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @if (User.Identity.IsAuthenticated && Model.Id == User.Identity.GetUserId())
+                    @if (User.Identity.IsAuthenticated && post.User.Id == User.Identity.GetUserId())
                     {
                         Html.RenderPartial("_dropdownPostEditDelete", post);
                     }
@@ -19,13 +19,13 @@
                     <div class="clearfix">
                         <div class="media">
                             <div class="media-left media-middle">
-                                <a href="@Url.Content("/ProfilUser/Show/" + Model.Id)">
-                                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64"/>
+                                <a href="@Url.Content("/ProfilUser/Show/" + post.User.Id)">
+                                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + post.User.Id + "/" + post.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
                                 </a>
                             </div>
                             <div class="media-body">
                                 <p class="media-heading">
-                                    @Html.ActionLink(Model.FullName, "Show", "ProfilUser", new {id = Model.Id}, null)
+                                    @Html.ActionLink(post.User.FullName, "Show", "ProfilUser", new { id = post.User.Id }, null)
                                 </p>
                                 <p class="media-heading">
                                     Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + post.PostId)"><small><span class="glyphicon glyphicon-time"></span> @post.Date </small></a>
@@ -46,7 +46,7 @@ else
 {
     <div class="panel panel-default">
         <div class="panel-body">
-           <p>Brak postów</p>
+            <p>Brak wpisów</p>
         </div>@*panel-body*@
     </div> @*panel panel-default*@
 }

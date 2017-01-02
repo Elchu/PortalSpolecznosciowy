@@ -29,15 +29,13 @@ namespace PortalSpolecznosciowy.Controllers
             List<ApplicationUser> friendUserAll = userfriends.ListOfFriendsUser(userLogged.Id).ToList();
             
             //dodanie zalogowanego uzytkownika aby mozna bylo wyswietlic jego posty wraz ze znajomymi
-            friendUserAll.Add(userLogged);
+            friendUserAll.Add(userLogged);  
 
-            UserFriendViewModel userFriendsViewModel = new UserFriendViewModel
-            {
-                User = userLogged,
-                AllFriendsUser = friendUserAll
-            };
+            //wybranie wszystich postow znajomych aby zrobic paginacje
+            IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post);
+            ViewBag.User = userLogged;
 
-            return View(userFriendsViewModel);
+            return View(listaPost);
         }
     }
 }

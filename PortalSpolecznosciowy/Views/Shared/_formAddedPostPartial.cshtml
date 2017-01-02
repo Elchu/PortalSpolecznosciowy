@@ -1,0 +1,19 @@
+﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
+        }
+        
+        @using (Html.BeginForm("AddPost", "Post", FormMethod.Post, htmlAttributes: new { id = "addPost" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("userId", Model.Id)
+            @Html.TextArea("content", htmlAttributes: new { @class = "form-control", rows = 5, cols = 60, placeholder = "what's up?" })
+            @Html.ValidationMessage("content", "", new { @class = "text-danger" })
+            <button type="submit" class="btn btn-default pull-right">Add entry</button>
+        }
+    </div>
+</div>
