@@ -19,7 +19,15 @@
                 <div class="col-sm-3 text-center">
                     <a href="@Url.Action("Show", "Friend", new {id = user.Id})">
                         <div class="thumbnail">
-                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + user.Id + "/" + user.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                            @if (user.Image.Contains("https"))
+                            {
+                                <img src="@user.Image" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("/Content/UploadUsersAvatars/" + user.Id + "/" + user.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                            }
+                            
                             <h5>@user.FullName</h5>
                         </div>
                     </a>

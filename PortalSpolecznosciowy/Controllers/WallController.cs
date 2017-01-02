@@ -31,7 +31,7 @@ namespace PortalSpolecznosciowy.Controllers
             //dodanie zalogowanego uzytkownika aby mozna bylo wyswietlic jego posty wraz ze znajomymi
             friendUserAll.Add(userLogged);  
 
-            //wybranie wszystich postow znajomych aby zrobic paginacje
+            //wybranie wszystich postow znajomych, aby zrobic paginacje
             IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post);
             ViewBag.User = userLogged;
 

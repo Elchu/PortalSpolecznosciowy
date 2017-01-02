@@ -24,8 +24,15 @@
             <div class="panel-body text-center">
 
                 @if (!Model.User.Image.IsEmpty())
-            {
-                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" alt="Avatar użytkownika" height="200" width="200" />
+                {
+                    if (Model.User.Image.Contains("https"))
+                    {
+                        <img src="@Model.User.Image" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                    }
                 }
 
                 <h2>

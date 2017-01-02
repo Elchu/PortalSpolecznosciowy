@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Generowanie danych</h2>
+<button type="button">Generuj dane</button>
+<div id="result"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Library/Faker/lib/faker.min.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $("document").ready(function() {
+
+            faker.locale = "pl";
+
+            $("button").click(function () {
+                var user = {
+                    email: faker.internet.email,
+                    fullName: faker.name.findName,
+                    image: faker.internet.avatar,
+                    pass: faker.internet.password,
+                    sex: faker.name.prefix
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/DataGenerator/GenerujDane/")",
+                    data: user,
+                    datatype: "html",
+                    success: function(data) {
+                        $('#result').html(data.success);
+                    }
+                });//ajax
+            });//button click
+        });
+    </script>
+}
+
