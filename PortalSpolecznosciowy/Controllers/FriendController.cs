@@ -38,6 +38,8 @@ namespace PortalSpolecznosciowy.Controllers
             UserFriends userFriends = new UserFriends();
             IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(id);
 
+            ViewBag.User = _db.Users.FirstOrDefault(u => u.Id == userLoggedId);
+
             UserFriendViewModel uf = new UserFriendViewModel()
             {
                 User = user,

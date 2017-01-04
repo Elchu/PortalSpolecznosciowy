@@ -20,8 +20,17 @@
 .showSinglePostAuthor {
     margin: 3px 10px;
 }
-
-.postBtnDelete {
-    
-}
 /*===== END POST =====*/
+
+/*===== COMMENT =====*/
+.commentPanel {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.commentContent {
+    max-width: 485px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+/*===== END COMMENT =====*/

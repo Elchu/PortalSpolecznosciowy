@@ -46,6 +46,9 @@ namespace PortalSpolecznosciowy.Controllers
             UserFriends userFriends = new UserFriends();
             IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(user.Id);
 
+            //uzytkownik zalogowanych do wyswietlenia w komentarzach jako zdjecie
+            ViewBag.User = _db.Users.FirstOrDefault(u=>u.Id == userLoggedId);
+
             //zbieram wszystkie potrzebne informacje do wyswieltenie w widoku
             UserFriendToAcceptedViewModel userFriendsViewModel = new UserFriendToAcceptedViewModel()
             {

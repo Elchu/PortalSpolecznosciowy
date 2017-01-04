@@ -205,6 +205,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DataGeneratorController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -248,8 +249,13 @@
     <Compile Include="Migrations\201612261639449_addModelPost.Designer.cs">
       <DependentUpon>201612261639449_addModelPost.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701031900160_AddModelComment.cs" />
+    <Compile Include="Migrations\201701031900160_AddModelComment.Designer.cs">
+      <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\HelpersClass\UserFriends.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -403,10 +409,12 @@
     <Content Include="Views\Shared\_displayPostPartial.cshtml" />
     <Content Include="Views\Shared\_formAddedPostPartial.cshtml" />
     <Content Include="Views\DataGenerator\Index.cshtml" />
+    <Content Include="Views\Shared\_formAddedCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\UploadUsersAvatars\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -439,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612261639449_addModelPost.resx">
       <DependentUpon>201612261639449_addModelPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701031900160_AddModelComment.resx">
+      <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

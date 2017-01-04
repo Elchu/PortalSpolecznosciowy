@@ -21,14 +21,21 @@
                         @foreach (var friend in Model)
                         {
                             <div class="col-sm-4 text-center">
-                                <a href="@Url.Content("~/Friend/Show/"+friend.Id)">
+                                <a href="@Url.Content("~/Friend/Show/" + friend.Id)">
                                     <div class="thumbnail">
-                                        <img src="@Url.Content("~/Content/UploadUsersAvatars/" + friend.Id + "/" + friend.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                                        @if (friend.Image.Contains("https"))
+                                        {
+                                            <img src="@friend.Image" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + friend.Id + "/" + friend.Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                                        }
                                         <h5>@friend.FullName</h5>
                                     </div>
                                 </a>
                             </div>
-                    }
+                        }
                     </div>
                 }
             </div>

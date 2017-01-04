@@ -7,11 +7,11 @@ using System.Web;
 
 namespace PortalSpolecznosciowy.Models
 {
-    public class Post
+    public class Comment
     {
         [Key]
         [Display(Name = "ID")]
-        public int PostId { get; set; }
+        public int CommentId { get; set; }
 
         [Required]
         [Display(Name = "Użytkownik")]
@@ -20,16 +20,21 @@ namespace PortalSpolecznosciowy.Models
         public string UserId { get; set; }
 
         [Required]
+        [Display(Name = "Post ID")]
+        public int PostId { get; set; }
+
+        [Required]
         [Column(TypeName = "text")]
         [Display(Name = "Treść")]
         public string Content { get; set; }
 
         [Display(Name = "Data dodania")]
-        public DateTime Date { get; set;}
+        public DateTime Date { get; set; }
 
         [Display(Name = "Czy usunięty")]
         public bool IsDeleted { get; set; }
+
         public virtual ApplicationUser User { get; set; }
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

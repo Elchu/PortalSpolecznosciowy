@@ -24,6 +24,7 @@ namespace PortalSpolecznosciowy.Models
 
         public virtual ICollection<Friend> Friend { get; set; }
         public virtual ICollection<Post> Post { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -39,7 +40,7 @@ namespace PortalSpolecznosciowy.Models
             : base("PortalSpolecznosciowyConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -47,7 +48,8 @@ namespace PortalSpolecznosciowy.Models
 
         public DbSet<Friend> Friend { get; set; }
         public DbSet<Post> Post { get; set; }
-
+        public DbSet<Comment> Comment { get; set; }
+ 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -65,6 +67,13 @@ namespace PortalSpolecznosciowy.Models
             .HasRequired<ApplicationUser>(s => s.User)
             .WithMany(s => s.Post)
             .HasForeignKey(s => s.UserId);
+
+            //one-to-many user-comments
+            modelBuilder.Entity<Comment>()
+            .HasRequired<ApplicationUser>(s => s.User)
+            .WithMany(s => s.Comment)
+            .HasForeignKey(s => s.UserId)
+            .WillCascadeOnDelete(false);
         }
 
     }
