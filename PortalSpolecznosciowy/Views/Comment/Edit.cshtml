@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
-@model PortalSpolecznosciowy.Models.Post
+@model PortalSpolecznosciowy.Models.Comment
 @{
-    ViewBag.Title = "Edit entry";
+    ViewBag.Title = "Edit comment";
 }
 
-<div class="row showSinglePost">
+<div class="row showSingleComment">
     <div class="col-lg-8 col-lg-offset-2">
 
 
@@ -13,7 +13,7 @@
 
                 @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
                 {
-                    Html.RenderPartial("_dropdownPostEditDelete", @Model);
+                    @Html.Partial("_dropdownCommentEditDelete", @Model);
                 }
 
                 <div class="clearfix">
@@ -33,11 +33,12 @@
                     </div>
                 </div>
 
-                <div id="post_@Model.PostId" class="showSinglePostContent">
-                    @using (Html.BeginForm("Edit", "Post", FormMethod.Post, htmlAttributes: new { id = "editPost" }))
+                <div id="commnet_@Model.CommentId" class="showSingleCommentContent">
+                    @using (Html.BeginForm("Edit", "Comment", FormMethod.Post, htmlAttributes: new { id = "editComment" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.CommentId)
                         @Html.HiddenFor(model => model.PostId)
                         @Html.HiddenFor(model => model.UserId)
                         @Html.TextAreaFor(model => model.Content, 5, 60, new { @class = "form-control" })
@@ -51,7 +52,3 @@
 
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

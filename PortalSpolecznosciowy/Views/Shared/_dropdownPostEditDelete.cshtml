@@ -8,17 +8,9 @@
             <a href="@Url.Content("/Post/Edit/" + Model.PostId)" class="btn btn-link">Edit</a>
         </li>
         <li>
-            @using (Ajax.BeginForm(new AjaxOptions()
-            {
-                HttpMethod = "Post",
-                Url = Url.Action("Delete", "Post", new { id = Model.PostId }),
-                Confirm = "Czy na pewno chcesz usunąć wpis?",
-                OnComplete = "OnComplete",
-                OnFailure = "OnFailure"
-            }))
-            {
-                <input type=submit value="Delete" class="btn btn-default postBtnDelete" />
-            }
+            <a href="@Url.Content("/Post/Delete/" + Model.PostId)" class="btn btn-link postBtnDelete">Delete</a>
         </li>
     </ul>
 </div>
+
+

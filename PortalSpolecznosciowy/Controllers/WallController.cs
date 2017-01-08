@@ -32,7 +32,7 @@ namespace PortalSpolecznosciowy.Controllers
             friendUserAll.Add(userLogged);  
 
             //wybranie wszystich postow znajomych, aby zrobic paginacje
-            IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post);
+            IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post).OrderByDescending(d=>d.Date).Where(p=>p.IsDeleted == false);
             ViewBag.User = userLogged;
 
             int pageSize = 4;

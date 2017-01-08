@@ -1,0 +1,14 @@
+﻿@model PortalSpolecznosciowy.Models.Comment
+<div class="dropdown pull-right ">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="@Url.Content("/Comment/Edit/" + Model.CommentId)" class="btn btn-link">Edit</a>
+        </li>
+        <li>
+            <a href="@Url.Content("/Comment/Delete/" + Model.CommentId)" class="btn btn-link commentBtnDelete">Delete</a>
+        </li>
+    </ul>
+</div>

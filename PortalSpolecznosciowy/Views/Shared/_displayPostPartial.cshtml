@@ -9,7 +9,7 @@
     {
         if (!post.IsDeleted)
         {
-            <div class="panel panel-default">
+            <div class="panel panel-default postPanel" id="postPanel_@post.PostId">
                 <div class="panel-body">
                     @if (User.Identity.IsAuthenticated && post.User.Id == User.Identity.GetUserId())
                     {
@@ -18,9 +18,19 @@
 
                     <div class="clearfix">
                         <div class="media">
-                            <div class="media-left media-middle">
+                            <div class="media-left media-middle pull-left">
                                 <a href="@Url.Content("/ProfilUser/Show/" + post.User.Id)">
-                                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + post.User.Id + "/" + post.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
+                                    @if (!post.User.Image.IsEmpty())
+                                    {
+                                        if (post.User.Image.StartsWith("https://"))
+                                        {
+                                            <img src="@post.User.Image" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + post.User.Id + "/" + post.User.Image)" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
+                                        }
+                                    }
                                 </a>
                             </div>
                             <div class="media-body">
@@ -30,12 +40,16 @@
                                 <p class="media-heading">
                                     Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + post.PostId)"><small><span class="glyphicon glyphicon-time"></span> @post.Date </small></a>
                                 </p>
-                                <div id="post_@post.PostId">
+                                <div id="post_@post.PostId" >
                                     @post.Content
                                 </div>
+                                <p class="pull-right">@post.Comment.Count(c=>c.IsDeleted == false) komentarzy</p>
+                                <span class="clearfix"></span>
+                                @Html.Partial("~/Views/Comment/_displaySingleCommentPartial.cshtml", post.Comment)
+
                             </div>
 
-                            @Html.Partial("_formAddedCommentPartial", post)
+                            @Html.Partial("~/Views/Comment/_formAddedCommentPartial.cshtml", post)
 
                         </div>
                     </div>@*clearfix*@

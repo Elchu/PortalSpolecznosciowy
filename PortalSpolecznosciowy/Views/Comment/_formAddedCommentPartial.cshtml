@@ -6,14 +6,18 @@
 {
     <div class="panel panel-default commentPanel">
         <div class="panel-body">
-            @if (TempData["Message"] != null)
+            @if (TempData["MessageComment"] != null)
             {
                 <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
+            }
+            @if (TempData["Error_" + Model.PostId] != null)
+            {
+                <div class="alert alert-danger" role="alert">@TempData["Error_" + Model.PostId]</div>
             }
 
             @using (Html.BeginForm("Add", "Comment", FormMethod.Post, htmlAttributes: new { id = "formComment" }))
             {
-                @Html.ValidationSummary()
+                //@Html.ValidationSummary()
                 @Html.AntiForgeryToken()
                 @Html.Hidden("UserId", User.Identity.GetUserId())
                 @Html.Hidden("PostId", Model.PostId)
@@ -34,9 +38,9 @@
                     }
                 }
 
-                <input type="text" name="Content_@Model.PostId" class="form-control commentContent pull-left" placeholder="Skomentuj" />
-                @Html.ValidationMessage("Content_" + Model.PostId, "", new { @class = "text-danger" })
+                <input type="text" name="Content_@Model.PostId" class="form-control commentContent pull-left" placeholder="Skomentuj" data-val="true" data-val-required="Pole nie może być puste." />
                 <button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+                <span class="field-validation-valid pull-left" data-valmsg-for="Content_@Model.PostId" data-valmsg-replace="true"></span>
             }
         </div>@*panel-body*@
     </div>@*panel panel-default commentPanel*@

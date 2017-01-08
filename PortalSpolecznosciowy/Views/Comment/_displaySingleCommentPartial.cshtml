@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PortalSpolecznosciowy.Models.Comment>
+@using Microsoft.AspNet.Identity
+@using PortalSpolecznosciowy.Models
+
+
+@if (Model.Any())
+{
+    foreach (Comment comment in Model.OrderBy(d => d.Date))
+    {
+        if (!comment.IsDeleted)
+        {
+            <div class="panel panel-default commentPanel_@comment.CommentId" id="commentPanel_@comment.CommentId">
+                <div class="panel-body">
+                    @if (User.Identity.IsAuthenticated && comment.UserId == User.Identity.GetUserId())
+                    {
+                        Html.RenderPartial("~/Views/Comment/_dropdownCommentEditDelete.cshtml", comment);
+                    }
+
+                    <div class="clearfix">
+                        <div class="media">
+                            <div class="media-left media-middle pull-left">
+                                <a href="@Url.Content("/ProfilUser/Show/" + comment.UserId)">
+                                    @if (!comment.User.Image.IsEmpty())
+                                    {
+                                        if (comment.User.Image.StartsWith("https://"))
+                                        {
+                                            <img src="@comment.User.Image" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + comment.User.Id + "/" + comment.User.Image)" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
+                                        }
+                                    }
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <p class="media-heading">
+                                    @Html.ActionLink(comment.User.FullName, "Show", "ProfilUser", new { id = comment.User.Id }, null)
+                                    <small><span class="glyphicon glyphicon-time"></span> @comment.Date </small>
+                                </p>
+
+                                <div id="comment_@comment.CommentId">
+                                    @comment.Content
+                                </div>
+                            </div>
+                        </div>
+                    </div>@*clearfix*@
+                </div>@*panel-body*@
+            </div> @*panel panel-default*@
+        } @*if post isdelete*@
+
+    } /*end foreach*/
+} @*end if*@
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>Brak wpisów</p>
+        </div>@*panel-body*@
+    </div> @*panel panel-default*@
+}
