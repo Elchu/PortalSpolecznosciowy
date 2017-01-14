@@ -253,12 +253,17 @@
     <Compile Include="Migrations\201701031900160_AddModelComment.Designer.cs">
       <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701141337053_AddModelLike.cs" />
+    <Compile Include="Migrations\201701141337053_AddModelLike.Designer.cs">
+      <DependentUpon>201701141337053_AddModelLike.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\HelpersClass\UserFriends.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ViewModel\SinglePostUser.cs" />
@@ -453,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701031900160_AddModelComment.resx">
       <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701141337053_AddModelLike.resx">
+      <DependentUpon>201701141337053_AddModelLike.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

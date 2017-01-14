@@ -25,6 +25,8 @@ namespace PortalSpolecznosciowy.Models
         public virtual ICollection<Friend> Friend { get; set; }
         public virtual ICollection<Post> Post { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Like> Like { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -72,6 +74,13 @@ namespace PortalSpolecznosciowy.Models
             modelBuilder.Entity<Comment>()
             .HasRequired<ApplicationUser>(s => s.User)
             .WithMany(s => s.Comment)
+            .HasForeignKey(s => s.UserId)
+            .WillCascadeOnDelete(false);
+
+            //one-to-many user-likes
+            modelBuilder.Entity<Like>()
+            .HasRequired<ApplicationUser>(s => s.User)
+            .WithMany(s => s.Like)
             .HasForeignKey(s => s.UserId)
             .WillCascadeOnDelete(false);
         }

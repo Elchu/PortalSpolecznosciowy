@@ -31,5 +31,6 @@ namespace PortalSpolecznosciowy.Models
         public bool IsDeleted { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Like> Like { get; set; }
     }
 }
