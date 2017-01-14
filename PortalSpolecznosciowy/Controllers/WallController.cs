@@ -35,6 +35,9 @@ namespace PortalSpolecznosciowy.Controllers
             IEnumerable<Post> listaPost = friendUserAll.SelectMany(p => p.Post).OrderByDescending(d=>d.Date).Where(p=>p.IsDeleted == false);
             ViewBag.User = userLogged;
 
+            //polubienia uzytkownika
+            TempData["UserLike"] = _db.Like.Where(l => l.UserId == loggedUserId).ToList();
+
             int pageSize = 4;
             int pageNumber = (page ?? 1);
 

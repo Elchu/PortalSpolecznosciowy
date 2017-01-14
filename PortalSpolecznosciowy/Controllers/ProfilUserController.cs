@@ -18,17 +18,17 @@ namespace PortalSpolecznosciowy.Controllers
     public class ProfilUserController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
+        
         public ActionResult Show(string id)
         {
             string userLoggedId = User.Identity.GetUserId();
             ApplicationUser user = _db.Users.Find(id);
-
+            
             if (user == null || userLoggedId == null)
             {
                 return HttpNotFound();
             }
-
+            
             //sprawdzam i pobieram jacy uzytkownicy sa zaproszeni do znajomosci ale jeszcze nie zaakceptowanymi
             var friends = (from f in _db.Friend
                 join u in _db.Users on f.UserFriendId equals u.Id
@@ -48,6 +48,9 @@ namespace PortalSpolecznosciowy.Controllers
 
             //uzytkownik zalogowanych do wyswietlenia w komentarzach jako zdjecie
             ViewBag.User = _db.Users.FirstOrDefault(u=>u.Id == userLoggedId);
+
+            //polubienia uzytkownika
+            TempData["UserLike"] = _db.Like.Where(l => l.UserId == userLoggedId).ToList();
 
             //zbieram wszystkie potrzebne informacje do wyswieltenie w widoku
             UserFriendToAcceptedViewModel userFriendsViewModel = new UserFriendToAcceptedViewModel()

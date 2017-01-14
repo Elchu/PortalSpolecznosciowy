@@ -87,6 +87,18 @@ namespace PortalSpolecznosciowy.Controllers
                     comment.IsDeleted = true;
                     _db.Entry(comment).State = EntityState.Modified;
 
+                    //wszystkie polubienia nalezace do komentarza
+                    List<Like> likes = _db.Like.Where(l => l.CommentId == comment.CommentId).ToList();
+
+                    //usuwamy polubienia komentarza
+                    if (likes.Any())
+                    {
+                        foreach (Like like in likes)
+                        {
+                            _db.Entry(like).State = EntityState.Deleted;
+                        }
+                    }
+
                     try
                     {
                         _db.SaveChanges();

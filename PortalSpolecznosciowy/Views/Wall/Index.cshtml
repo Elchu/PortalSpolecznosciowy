@@ -19,9 +19,9 @@
     </div>
 
     <div class="col-md-7">
-        @Html.Partial("_formAddedPostPartial", (ApplicationUser)ViewBag.User)
+        @Html.Partial("~/Views/Post/_formAddedPostPartial.cshtml", (ApplicationUser)ViewBag.User)
 
-        @Html.Partial("_displayPostPartial", Model)
+        @Html.Partial("~/Views/Post/_displayPostPartial.cshtml", Model)
 
         <div class="col-md-7 text-center">
             Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount

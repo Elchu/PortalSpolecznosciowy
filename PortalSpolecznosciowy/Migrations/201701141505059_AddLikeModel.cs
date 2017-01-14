@@ -3,7 +3,7 @@ namespace PortalSpolecznosciowy.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddModelLike : DbMigration
+    public partial class AddLikeModel : DbMigration
     {
         public override void Up()
         {

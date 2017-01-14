@@ -43,6 +43,11 @@
                                     @comment.Content
                                 </div>
                             </div>
+
+                            <div class="pull-left">
+                                @Html.Partial("~/Views/Like/_formAddLikeComment.cshtml", comment)
+                            </div>
+
                         </div>
                     </div>@*clearfix*@
                 </div>@*panel-body*@

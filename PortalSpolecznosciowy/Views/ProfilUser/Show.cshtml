@@ -91,9 +91,9 @@
     </div>@*col-md-3 col-md-offset-1*@
 
     <div class="col-md-7">
-        @Html.Partial("_formAddedPostPartial", Model.User)
+        @Html.Partial("~/Views/Post/_formAddedPostPartial.cshtml", Model.User)
 
-        @Html.Partial("_displayPostPartial", Model.User.Post)
+        @Html.Partial("~/Views/Post/_displayPostPartial.cshtml", Model.User.Post)
     </div>
 </div>
 

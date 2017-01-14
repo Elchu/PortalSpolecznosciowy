@@ -1,0 +1,48 @@
+﻿@model PortalSpolecznosciowy.Models.Post
+@using Microsoft.AspNet.Identity
+@using PortalSpolecznosciowy.Models
+
+@{
+    ViewBag.Title = "Polubienie";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    //jesli uzytkownik posiada polubienie
+    if (((List<Like>)@TempData["UserLike"]).Any(l => l.PostId == Model.PostId))
+    {
+        using (Html.BeginForm("Delete", "Like", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("userId", User.Identity.GetUserId())
+            @Html.Hidden("postId", Model.PostId)
+            <button type="submit" id="addLikeToPost" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Nie lubię
+                <span class="badge"> @Model.Like.Count()</span>
+            </button>
+        }
+
+    }
+    else if (Model.UserId != User.Identity.GetUserId())
+    {
+        using (Html.BeginForm("Add", "Like", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("userId", User.Identity.GetUserId())
+            @Html.Hidden("postId", Model.PostId)
+            <button type="submit" id="addLikeToPost" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Lubię to
+                <span class="badge"> @Model.Like.Count()</span>
+            </button>
+        }
+
+    }
+    else
+    {
+        <button type="submit" id="addLikeToPost" class="btn btn-primary btn-xs disabled">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Polubień
+            <span class="badge"> @Model.Like.Count()</span>
+        </button>
+    }
+
+}

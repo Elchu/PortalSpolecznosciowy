@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     @if (User.Identity.IsAuthenticated && post.User.Id == User.Identity.GetUserId())
                     {
-                        Html.RenderPartial("_dropdownPostEditDelete", post);
+                        Html.RenderPartial("~/Views/Post/_dropdownPostEditDelete.cshtml", post);
                     }
 
                     <div class="clearfix">
@@ -40,11 +40,17 @@
                                 <p class="media-heading">
                                     Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + post.PostId)"><small><span class="glyphicon glyphicon-time"></span> @post.Date </small></a>
                                 </p>
-                                <div id="post_@post.PostId" >
+                                <div id="post_@post.PostId">
                                     @post.Content
                                 </div>
-                                <p class="pull-right">@post.Comment.Count(c=>c.IsDeleted == false) komentarzy</p>
+
+                                <div class="pull-left">
+                                    @Html.Partial("~/Views/Like/_formAddLikePost.cshtml", post)
+                                </div>
+
+                                <p class="pull-right">@post.Comment.Count(c => c.IsDeleted == false) komentarzy</p>
                                 <span class="clearfix"></span>
+
                                 @Html.Partial("~/Views/Comment/_displaySingleCommentPartial.cshtml", post.Comment)
 
                             </div>

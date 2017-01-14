@@ -209,6 +209,7 @@
     <Compile Include="Controllers\DataGeneratorController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfilUserController.cs" />
@@ -253,9 +254,9 @@
     <Compile Include="Migrations\201701031900160_AddModelComment.Designer.cs">
       <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701141337053_AddModelLike.cs" />
-    <Compile Include="Migrations\201701141337053_AddModelLike.Designer.cs">
-      <DependentUpon>201701141337053_AddModelLike.cs</DependentUpon>
+    <Compile Include="Migrations\201701141505059_AddLikeModel.cs" />
+    <Compile Include="Migrations\201701141505059_AddLikeModel.Designer.cs">
+      <DependentUpon>201701141505059_AddLikeModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -408,17 +409,19 @@
     <Content Include="Views\Friend\ListOfFriends.cshtml" />
     <Content Include="Views\Post\ShowSinglePost.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
-    <Content Include="Views\Shared\_dropdownPostEditDelete.cshtml" />
+    <Content Include="Views\Post\_dropdownPostEditDelete.cshtml" />
     <Content Include="Views\Wall\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Shared\_userProfilPartial.cshtml" />
-    <Content Include="Views\Shared\_displayPostPartial.cshtml" />
-    <Content Include="Views\Shared\_formAddedPostPartial.cshtml" />
+    <Content Include="Views\Post\_displayPostPartial.cshtml" />
+    <Content Include="Views\Post\_formAddedPostPartial.cshtml" />
     <Content Include="Views\DataGenerator\Index.cshtml" />
     <Content Include="Views\Comment\_formAddedCommentPartial.cshtml" />
     <Content Include="Views\Comment\_displaySingleCommentPartial.cshtml" />
     <Content Include="Views\Comment\_dropdownCommentEditDelete.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Like\_formAddLikePost.cshtml" />
+    <Content Include="Views\Like\_formAddLikeComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -459,8 +462,8 @@
     <EmbeddedResource Include="Migrations\201701031900160_AddModelComment.resx">
       <DependentUpon>201701031900160_AddModelComment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701141337053_AddModelLike.resx">
-      <DependentUpon>201701141337053_AddModelLike.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701141505059_AddLikeModel.resx">
+      <DependentUpon>201701141505059_AddLikeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

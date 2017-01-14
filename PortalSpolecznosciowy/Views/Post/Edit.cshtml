@@ -13,7 +13,8 @@
 
                 @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
                 {
-                    Html.RenderPartial("_dropdownPostEditDelete", @Model);
+
+                    Html.RenderPartial("~/Views/Post/_dropdownPostEditDelete.cshtml", @Model);
                 }
 
                 <div class="clearfix">

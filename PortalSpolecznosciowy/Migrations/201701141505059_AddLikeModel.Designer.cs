@@ -7,13 +7,13 @@ namespace PortalSpolecznosciowy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddModelLike : IMigrationMetadata
+    public sealed partial class AddLikeModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddModelLike));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddLikeModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701141337053_AddModelLike"; }
+            get { return "201701141505059_AddLikeModel"; }
         }
         
         string IMigrationMetadata.Source

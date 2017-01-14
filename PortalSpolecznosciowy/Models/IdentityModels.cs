@@ -51,7 +51,9 @@ namespace PortalSpolecznosciowy.Models
         public DbSet<Friend> Friend { get; set; }
         public DbSet<Post> Post { get; set; }
         public DbSet<Comment> Comment { get; set; }
- 
+        public DbSet<Like> Like { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

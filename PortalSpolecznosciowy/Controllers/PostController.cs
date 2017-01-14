@@ -24,6 +24,8 @@ namespace PortalSpolecznosciowy.Controllers
                 TempData["ErrorPost"] = "Wiadomość nie może być pusta.";
             }
 
+            TempData["UserLike"] = _db.Like.Where(l => l.UserId == userId).ToList();
+
             if (ModelState.IsValid)
             {
                 Post newPost = new Post()
@@ -132,6 +134,19 @@ namespace PortalSpolecznosciowy.Controllers
                     }
                 }
 
+                //wszystkie polubienia nalezace do posta
+                List<Like> likes = _db.Like.Where(l => l.PostId == post.PostId).ToList();
+
+                //usuwamy polubienia posta
+                if (likes.Any())
+                {
+                    foreach (Like like in likes)
+                    {
+                        _db.Entry(like).State = EntityState.Deleted;
+                    }
+                }
+
+                //ustawiam posta na usuniety
                 post.IsDeleted = true;
                 _db.Entry(post).State = EntityState.Modified;
                 
