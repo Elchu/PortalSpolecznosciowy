@@ -258,6 +258,10 @@
     <Compile Include="Migrations\201701141505059_AddLikeModel.Designer.cs">
       <DependentUpon>201701141505059_AddLikeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701231547017_AddedModelNotification.cs" />
+    <Compile Include="Migrations\201701231547017_AddedModelNotification.Designer.cs">
+      <DependentUpon>201701231547017_AddedModelNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -266,6 +270,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ViewModel\SinglePostUser.cs" />
     <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
@@ -464,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701141505059_AddLikeModel.resx">
       <DependentUpon>201701141505059_AddLikeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701231547017_AddedModelNotification.resx">
+      <DependentUpon>201701231547017_AddedModelNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

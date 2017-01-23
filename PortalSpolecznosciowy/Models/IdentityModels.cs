@@ -52,7 +52,7 @@ namespace PortalSpolecznosciowy.Models
         public DbSet<Post> Post { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Like> Like { get; set; }
-
+        public DbSet<Notification> Notification { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -4,7 +4,7 @@
 }
 
 <h2>Generowanie danych</h2>
-<button type="button">Generuj dane</button>
+<button type="button" id="CreateUser">Utwórz użytkownika</button>
 <div id="result"></div>
 
 @section Scripts {
@@ -17,7 +17,7 @@
 
             faker.locale = "pl";
 
-            $("button").click(function () {
+            $("#CreateUser").click(function () {
                 var user = {
                     email: faker.internet.email,
                     fullName: faker.name.findName,
@@ -35,7 +35,7 @@
                         $('#result').html(data.success);
                     }
                 });//ajax
-            });//button click
+            });//#CreateUser click
         });
     </script>
 }

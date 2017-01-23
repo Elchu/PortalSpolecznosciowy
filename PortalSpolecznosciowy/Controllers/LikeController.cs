@@ -13,6 +13,13 @@ namespace PortalSpolecznosciowy.Controllers
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        /// <summary>
+        /// Dodanie polubienia
+        /// </summary>
+        /// <param name="userId">id uzytkownika ktory lubi</param>
+        /// <param name="postId">id posta polubionego</param>
+        /// <param name="commentId">id komentarza polubionego</param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Add(string userId, int? postId = null, int? commentId = null)
@@ -42,6 +49,13 @@ namespace PortalSpolecznosciowy.Controllers
             return RedirectToAction("Index", "Wall");
         }
 
+        /// <summary>
+        /// usuniecie polubienia
+        /// </summary>
+        /// <param name="userId">id uzytkownika ktory nie lubi</param>
+        /// <param name="postId">id posta nie lubianego</param>
+        /// <param name="commentId">id komentarza nie lubionego</param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Delete(string userId, int? postId = null, int? commentId = null)
