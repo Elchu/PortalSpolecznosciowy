@@ -1,0 +1,5 @@
+﻿@model IQueryable<PortalSpolecznosciowy.Models.Notification>
+
+<ul class="nav navbar-nav">
+    <li><a href="@Url.Action("Index", "Notification")" class="btn btn-link">Powiadomienie <span class="badge powiadomienie"> @Model.Count()</span></a></li>
+</ul>

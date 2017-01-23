@@ -23,8 +23,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("O nas", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                     <li>
                         @* wyszukiwarka *@
                         @using (Html.BeginForm("UserSearch", "Search", FormMethod.Get))
@@ -41,7 +39,11 @@
                         @* koniec wyszukiwarki *@
                     </li>
                 </ul>
-                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    Html.RenderAction("NotificationCount", "Notification");
+                }
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

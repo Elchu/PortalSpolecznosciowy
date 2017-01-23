@@ -69,3 +69,13 @@
 }
 
 /*===== END VALIDATE =====*/
+
+
+/*===== LAYOUT =====*/
+
+.powiadomienie {
+    background-color: white;
+    color: red;
+}
+
+/*===== END LAYOUT =====*/

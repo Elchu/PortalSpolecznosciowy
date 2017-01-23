@@ -39,6 +39,8 @@ namespace PortalSpolecznosciowy.Controllers
             IEnumerable<ApplicationUser> friendUserAll = userFriends.ListOfFriendsUser(id);
 
             ViewBag.User = _db.Users.FirstOrDefault(u => u.Id == userLoggedId);
+            //polubienia uzytkownika
+            TempData["UserLike"] = _db.Like.Where(l => l.UserId == userLoggedId).ToList();
 
             UserFriendViewModel uf = new UserFriendViewModel()
             {
@@ -58,6 +60,9 @@ namespace PortalSpolecznosciowy.Controllers
         { 
             string userLoggedId = User.Identity.GetUserId();
 
+            string fullUserName = _db.Users.FirstOrDefault(n => n.Id == userLoggedId).FullName;
+            string fullFriendName = _db.Users.FirstOrDefault(n => n.Id == friendId).FullName;
+
             //sprawdzam czy znajomosc nie istnieje w bazie, jesli nie to mozemy dodac znajomosc
             var isFriend = _db.Friend.FirstOrDefault(
                 s =>
@@ -74,6 +79,18 @@ namespace PortalSpolecznosciowy.Controllers
                     Time = DateTime.Now
                 };
                 _db.Friend.Add(newFriend);
+
+                //wysylamy powiadomienie o dodaniu zaproszenia przez uzytkownika
+                Notification newNotification = new Notification()
+                {
+                    FromWhoId = userLoggedId,
+                    FullNameFromWho = fullUserName,
+                    ToWhomId = friendId,
+                    FullNameToWhom = fullFriendName,
+                    Message = "Zaproszenie do znajomych.",
+                    CreateDate = DateTime.Now
+                };
+                _db.Notification.Add(newNotification);
 
                 try
                 {
@@ -97,6 +114,10 @@ namespace PortalSpolecznosciowy.Controllers
         public ActionResult Accept(string friendId)
         {
             string userLoggedId = User.Identity.GetUserId();
+
+            string fullUserName = _db.Users.FirstOrDefault(n => n.Id == userLoggedId).FullName;
+            string fullFriendName = _db.Users.FirstOrDefault(n => n.Id == friendId).FullName;
+
             //friendId to osoba ktora wyslala zaproszenie, userFriendId to osoba przyjmujaca zaproszenie
             var friend = _db.Friend.FirstOrDefault(f => f.UserFriendId == userLoggedId && f.UserId == friendId);
 
@@ -104,6 +125,18 @@ namespace PortalSpolecznosciowy.Controllers
             {
                 friend.Accepted = true;
                 _db.Entry(friend).State = EntityState.Modified;
+
+                //wysylamy powiadomienie o akceptacji zaproszenia
+                Notification newNotification = new Notification()
+                {
+                    FromWhoId = userLoggedId,
+                    FullNameFromWho = fullUserName,
+                    ToWhomId = friendId,
+                    FullNameToWhom = fullFriendName,
+                    Message = "Zaproszenie zostało zaakceptowane.",
+                    CreateDate = DateTime.Now
+                };
+                _db.Notification.Add(newNotification);
 
                 try
                 {

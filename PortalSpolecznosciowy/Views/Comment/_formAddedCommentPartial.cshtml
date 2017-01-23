@@ -27,13 +27,13 @@
                     if (((ApplicationUser)ViewBag.User).Image.StartsWith("https://"))
                     {
                         <a href="@Url.Content("/ProfilUser/Show/" + (((ApplicationUser)ViewBag.User).Id))">
-                            <img src="@(((ApplicationUser)ViewBag.User).Image)" class="img-responsive" alt="Avatar użytkownika" height="200" width="200" />
+                            <img src="@(((ApplicationUser)ViewBag.User).Image)" class="img-responsive pull-left" alt="Avatar użytkownika" height="42" width="42" />
                         </a>
                     }
                     else
                     {
                         <a href="@Url.Content("/ProfilUser/Show/" + (((ApplicationUser)ViewBag.User).Id))">
-                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + (((ApplicationUser)ViewBag.User).Id) + "/" + (((ApplicationUser)ViewBag.User).Image))" class="pull-left img-responsive" alt="Avatar użytkownika" height="42" width="42" />
+                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + (((ApplicationUser)ViewBag.User).Id) + "/" + (((ApplicationUser)ViewBag.User).Image))" class="img-responsive pull-left" alt="Avatar użytkownika" height="42" width="42" />
                         </a>
                     }
                 }

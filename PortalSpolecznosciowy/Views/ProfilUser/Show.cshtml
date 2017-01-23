@@ -57,9 +57,10 @@
                 }
                 <p>@Model.User.Email</p>
 
-            <p>
-                <a href="@Url.Action("ListOfFriends", "ProfilUser")" class="btn btn-xs btn-primary">Znajomych <span class="badge">@Model.AllFriendsUser.Count()</span></a>
-            </p>
+                <p>
+
+                    <a href="@Url.Action("ListOfFriends", "ProfilUser", new {id = Model.User.Id})" class="btn btn-xs btn-primary">Znajomych <span class="badge">@Model.AllFriendsUser.Count()</span></a>
+                </p>
 
 
         </div>
@@ -91,6 +92,16 @@
     </div>@*col-md-3 col-md-offset-1*@
 
     <div class="col-md-7">
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
+                </div>
+            </div>
+        }
+
         @Html.Partial("~/Views/Post/_formAddedPostPartial.cshtml", Model.User)
 
         @Html.Partial("~/Views/Post/_displayPostPartial.cshtml", Model.User.Post)

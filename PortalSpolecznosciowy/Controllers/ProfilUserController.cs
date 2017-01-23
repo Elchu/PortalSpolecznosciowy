@@ -63,13 +63,14 @@ namespace PortalSpolecznosciowy.Controllers
             return View(userFriendsViewModel);
         }
 
-        public ActionResult ListOfFriends()
+        public ActionResult ListOfFriends(string id)
         {
             string loggedUserId = User.Identity.GetUserId();
             
             //pobieram wszystkich znajomych uzytkownika zalogowanego
             UserFriends uf = new UserFriends();
-            IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(loggedUserId);
+            //IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(loggedUserId);
+            IEnumerable<ApplicationUser> friendUserAll = uf.ListOfFriendsUser(id);
 
             return View(friendUserAll);
         }
