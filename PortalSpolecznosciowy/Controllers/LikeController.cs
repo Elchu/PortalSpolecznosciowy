@@ -16,7 +16,7 @@ namespace PortalSpolecznosciowy.Controllers
         /// <summary>
         /// Dodanie polubienia
         /// </summary>
-        /// <param name="userId">id uzytkownika ktory lubi</param>
+        /// <param name="userId">id uzytkownika ktory polubił</param>
         /// <param name="postId">id posta polubionego</param>
         /// <param name="commentId">id komentarza polubionego</param>
         /// <returns></returns>

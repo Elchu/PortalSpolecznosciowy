@@ -440,6 +440,7 @@
     <Content Include="Views\Like\_formAddLikePost.cshtml" />
     <Content Include="Views\Like\_formAddLikeComment.cshtml" />
     <Content Include="Views\Notification\_notificationCount.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

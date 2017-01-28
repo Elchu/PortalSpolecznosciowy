@@ -1,0 +1,44 @@
+﻿@using PortalSpolecznosciowy.Models
+@model IQueryable<PortalSpolecznosciowy.Models.Notification>
+
+@{
+    ViewBag.Title = "Powiadomienia";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Powiadomienia</div>
+                <div class="panel-body">
+                    @if (TempData["MessageNotification"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">@TempData["Message"]</div>
+                    }
+                    @if (!Model.Any())
+                    {
+                        <h4 class="text-center">Brak powiadomień</h4>
+                    }
+                    else
+                    {
+                        <ul class="list-group">
+                            @foreach (Notification notifi in Model)
+                            {
+                                <li class="list-group-item clearfix">
+                                    <span class="pull-left">@Html.ActionLink(notifi.FullNameFromWho, "Show", "Friend", new { id = notifi.FromWhoId }, null) - @notifi.Message </span>
+
+                                    @using (Html.BeginForm("Read", "Notification", FormMethod.Post, htmlAttributes: new {id = "readNotification" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("notificationId", notifi.NotificationId)
+                                        <button type="submit" class="btn btn-xs btn-success pull-right">Przeczytane</button>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
