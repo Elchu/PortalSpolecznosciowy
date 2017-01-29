@@ -24,6 +24,7 @@ namespace PortalSpolecznosciowy.Controllers
         [HttpPost]
         public ActionResult Add(string userId, int? postId = null, int? commentId = null)
         {
+
             if (User.Identity.IsAuthenticated && User.Identity.GetUserId().Equals(userId))
             {
                 Like newLike = new Like()
@@ -34,7 +35,21 @@ namespace PortalSpolecznosciowy.Controllers
                     Data = DateTime.Now
                 };
 
+                //dodajemy nowe polubienie do bazy
                 _db.Like.Add(newLike);
+
+                Notification notifi = null;
+
+                //dodajemy powiadomienie jesli polubiony zostal post
+                if (postId != null)
+                    notifi = AddNotificationPost(userId, postId);
+
+                //dodajemy powiadomienie jesli polubiony zostal komentarz
+                if (commentId != null)
+                    notifi = AddNotificationComment(userId, commentId);
+
+                //dodajemy do bazy nowe powiadomienie
+                _db.Notification.Add(notifi);
 
                 try
                 {
@@ -82,6 +97,76 @@ namespace PortalSpolecznosciowy.Controllers
                 }
             }
             return RedirectToAction("Index", "Wall");
+        }
+
+        /// <summary>
+        /// Dodaje powiadomienie do polubionego komentarza
+        /// </summary>
+        /// <param name="userId">ID uzytkownika ktory polubiol komentarz</param>
+        /// <param name="commentId">ID polubionego komentarza</param>
+        /// <returns>Zwraca powiadomienie</returns>
+        public Notification AddNotificationComment(string userId, int? commentId)
+        {
+            //powiadomienie o polubieniu komentarza.
+            Notification notifi = new Notification()
+            {
+                CreateDate = DateTime.Now,
+                Message = "Polubił Twój komentarz."
+            };
+
+            //pobieram komentarz ktory zostal polubiony, aby wyciagnac dane uzytkownika, ktory napisal komentarz.
+            Comment comment = _db.Comment.FirstOrDefault(c => c.CommentId == commentId);
+            if (comment != null)
+            {
+                notifi.CommentId = comment.CommentId;
+                notifi.FullNameToWhom = comment.User.FullName;
+                notifi.ToWhomId = comment.User.Id;
+            }
+
+            ApplicationUser userLogged = _db.Users.FirstOrDefault(u => u.Id.Equals(userId));
+
+            if (userLogged != null)
+            {
+                notifi.FromWhoId = userLogged.Id;
+                notifi.FullNameFromWho = userLogged.FullName;
+            }
+
+            return notifi;
+        }
+        
+        /// <summary>
+        /// Dodaje powiadomienie do polubionego posta
+        /// </summary>
+        /// <param name="userId">ID uzytkownika ktory polubiol komentarz</param>
+        /// <param name="postId">ID polubionego komentarza</param>
+        /// <returns>Zwraca powiadomienie</returns>
+        public Notification AddNotificationPost(string userId, int? postId)
+        {
+            //powiadomienie o polubieniu posta.
+            Notification notifi = new Notification()
+            {
+                CreateDate = DateTime.Now,
+                Message = "Polubił Twój post."
+            };
+
+            //pobieram post ktory zostal polubiony, aby wyciagnac dane uzytkownika, ktory napisal post.
+            Post post = _db.Post.FirstOrDefault(p => p.PostId == postId);
+            if (post != null)
+            {
+                notifi.PostId = post.PostId;
+                notifi.FullNameToWhom = post.User.FullName;
+                notifi.ToWhomId = post.User.Id;
+            }
+
+            ApplicationUser userLogged = _db.Users.FirstOrDefault(u => u.Id.Equals(userId));
+
+            if (userLogged != null)
+            {
+                notifi.FromWhoId = userLogged.Id;
+                notifi.FullNameFromWho = userLogged.FullName;
+            }
+
+            return notifi;
         }
     }
 }

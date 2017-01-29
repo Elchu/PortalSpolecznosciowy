@@ -10,7 +10,6 @@ namespace PortalSpolecznosciowy.Controllers
 {
     public class CommentController : Controller
     {
-
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
                
         [HttpPost]
@@ -111,6 +110,12 @@ namespace PortalSpolecznosciowy.Controllers
                 }
             }
             return Json(new { message = "Wystąpił błąd podczas usuwania wpisu. Spróbuj później" }, JsonRequestBehavior.AllowGet);
+        }
+
+        ///ToDo dodanie wyswietlania pojedynczego komentarza.
+        public ActionResult ShowSingleComment(int id)
+        {
+            return View();
         }
     }
 }

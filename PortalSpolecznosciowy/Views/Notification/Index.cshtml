@@ -25,9 +25,20 @@
                             @foreach (Notification notifi in Model)
                             {
                                 <li class="list-group-item clearfix">
-                                    <span class="pull-left">@Html.ActionLink(notifi.FullNameFromWho, "Show", "Friend", new { id = notifi.FromWhoId }, null) - @notifi.Message </span>
+                                    <span class="pull-left">
+                                        @Html.ActionLink(notifi.FullNameFromWho, "Show", "Friend", new { id = notifi.FromWhoId }, null) - @notifi.Message
 
-                                    @using (Html.BeginForm("Read", "Notification", FormMethod.Post, htmlAttributes: new {id = "readNotification" }))
+                                        @if (notifi.CommentId != null)
+                                        {
+                                            <a href="@Url.Action("ShowSingleComment", "Comment", new { id = notifi.CommentId }, null)"> Zobacz </a>
+                                        }
+                                        @if (notifi.PostId != null)
+                                        {
+                                            <a href="@Url.Action("ShowSinglePost", "Post", new { id = notifi.PostId }, null)"> Zobacz </a>
+                                        }
+                                    </span>
+
+                                    @using (Html.BeginForm("Read", "Notification", FormMethod.Post, htmlAttributes: new { id = "readNotification" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.Hidden("notificationId", notifi.NotificationId)
