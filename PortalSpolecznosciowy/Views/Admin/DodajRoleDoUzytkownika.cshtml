@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Dodaj role do użytkownika";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dodaj rolę do użytkownika</h2>
+@using (Html.BeginForm("DodajRoleDoUzytkownika", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Użytkownik: @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Wybierz użytkownika")
+        Nazwa roli: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Wybierz Rolę")
+    </p>
+    <input type="submit" value="Dodaj rolę" />
+    @ViewBag.Potwierdzenie;
+}
+<br />
+@Html.ActionLink("Wróć do listy", "Index", "Admin")

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "WyswietlRoleUzytkownika";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Wyświetl role użytkownika</h3>
+@using (Html.BeginForm("WyswietlRoleUzytkownika", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Użytkownik: @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Wybierz użytkownika")
+        <input type="submit" value="Wyświetl role tego użytkownika" />
+    </p>
+}
+@if (ViewBag.RolesForThisUser != null)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Role użytkownika</h3>
+        </div>
+        <div class="panel-body">
+            <ol>
+                @foreach (string s in ViewBag.RolesForThisUser)
+                {
+                    <li>@s</li>
+                }
+            </ol>
+        </div>
+    </div>   
+}
+<hr />
+
+<br />
+@Html.ActionLink("Wróć do listy", "Index", "Admin")

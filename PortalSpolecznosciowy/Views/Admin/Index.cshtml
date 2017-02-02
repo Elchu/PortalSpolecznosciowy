@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "Panel administracyjny";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Witamy w panelu administracyjnym</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Panel administracyjny</h3>
+    </div>
+    <div class="panel-body">
+        <div role="tabpanel">
+
+            @*poczatek accordion*@
+            <div class="panel-group" id="AdminAccordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                Panel - Blog
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "Kategorie")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/document-icon.png")" alt="Przeglądaj kategorie">
+                                        <div class="caption text-center">
+                                            <h5>Kategorie</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "Post")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/news-alt-icon.png")" alt="Przeglądaj posty">
+                                        <div class="caption text-center">
+                                            <h5>Posty</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "Komentarze")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Comments-icon.png")" alt="Przeglądaj komentarze">
+                                        <div class="caption text-center">
+                                            <h5>Komentarze</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                Panel - Naprawa samochodów
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("ListaSamochodowDoNaprawy", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Car-Repair-icon.png")" alt="Przeglądaj listę samochodów do naprawy">
+                                        <div class="caption text-center">
+                                            <h5>Do naprawy</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("ListaSamochodowNaprawionych", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/First-Place-icon.png")" alt="Przeglądaj listę samochodów naprawionych">
+                                        <div class="caption text-center">
+                                            <h5>Naprawione</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                Panel - Słowniki
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "Marka")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/markiSamochodowe.jpg")" alt="Dodaj markę">
+                                        <div class="caption text-center">
+                                            <h5>Dodaj markę</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "Model")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/modelSamochod.jpg")" alt="Dodaj model">
+                                        <div class="caption text-center">
+                                            <h5>Dodaj model</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                Panel - Zarządzaj rolami
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("UtworzRole", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Bookmark-add-icon.png")" alt="Utwórz rolę">
+                                        <div class="caption text-center">
+                                            <h5>Utwórz rolę</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("ListaRol", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Inventory-icon.png")" alt="Lista ról">
+                                        <div class="caption text-center">
+                                            <h5>Lista ról</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("DodajRoleDoUzytkownika", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Actions-list-add-user-icon.png")" alt="Dodaj rolę użytkownikowi">
+                                        <div class="caption text-center">
+                                            <h5>Dodaj rolę użytkownikowi</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("UsunRoleUzytkownikowi", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Actions-user-group-delete-icon.png")" alt="Usuń rolę użytkownikowi">
+                                        <div class="caption text-center">
+                                            <h5>Usuń rolę użytkownikowi</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("WyswietlRoleUzytkownika", "Admin")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/Groups-Meeting-Dark-icon.png")" alt="Wyświetl rolę użytkownika">
+                                        <div class=" caption text-center">
+                                            <h5>Wyświetl rolę użytkownika</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                Panel - Sklep
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                Panel - Komis
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "KomisKategoria")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/add.jpg")" alt="Komis - przeglądaj kategorię">
+                                        <div class="caption text-center">
+                                            <h5>Przeglądaj Kategorię</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Index", "KomisPojazd")" class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/add.jpg")" alt="Komis - przeglądaj samochody">
+                                        <div class="caption text-center">
+                                            <h5>Przeglądaj samochody</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#statystyka" aria-expanded="false" aria-controls="statystyka">
+                                Panel - Statystyka serwisu
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="statystyka" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Statystyka", "Admin")" cla class="thumbnail">
+                                        <img src="@Url.Content("~/images/AdminIco/statystyka.jpg")" alt="Komis - przeglądaj kategorię">
+                                        <div class="caption text-center">
+                                            <h5>Statystyki</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>@*koniec accordion*@
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $('#AdminAccordion').collapse('toggle');
+        })
+    </script>
+}

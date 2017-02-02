@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Utworz rolę";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Utwórz rolę</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" class="form-control" id="RoleName" name="RoleName" placeholder="Dodaj rolę">
+        </div>
+    </div>
+    <input type="submit" value="Zapisz" class="btn btn-primary" />
+}
+
+<br />
+@Html.ActionLink("Wróć do listy", "Index")

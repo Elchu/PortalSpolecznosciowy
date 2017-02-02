@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Usun rolę użytkownikowi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(@ViewBag.ResultSuccess))
+{
+    <div class="alert alert-success" role="alert">@ViewBag.ResultMessage</div>  
+}
+
+@if (!string.IsNullOrEmpty(@ViewBag.ResultWarning))
+{
+    <div class="alert alert-warning" role="alert">@ViewBag.ResultMessage</div>
+}
+
+<h2>Usuń rolę do użytkownika</h2>
+@using (Html.BeginForm("UsunRoleUzytkownikowi", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Użytkownik: @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Wybierz użytkownika")
+        Nazwa roli: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Wybierz Rolę")
+    </p>
+    <input type="submit" value="Usuń rolę" />    
+}
+<br />
+@Html.ActionLink("Wróć do listy", "Index", "Admin")
+

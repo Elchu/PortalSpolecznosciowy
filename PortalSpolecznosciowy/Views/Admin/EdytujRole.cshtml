@@ -1,0 +1,32 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Edytuj role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(@ViewBag.Blad))
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Blad</div>
+}
+
+<h2>Edytuj role</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Edytuj rolę</div>
+            @Html.TextBoxFor(model => model.Name)
+            
+        </div>
+    </div>
+    <input type="submit" value="Zapisz" class="btn btn-primary" />
+}
+<br />
+@Html.ActionLink("Wróć do listy", "Index")
+
+

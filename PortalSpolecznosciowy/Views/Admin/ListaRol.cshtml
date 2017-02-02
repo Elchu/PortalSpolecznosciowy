@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Lista ról";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista ról</h2>
+@if (!string.IsNullOrEmpty(ViewBag.ResultMessage))
+{
+    <p class="bg-success">@ViewBag.ResultMessage</p>
+}
+<div>
+    @foreach (var Role in Model)
+    {
+        <p>
+            <strong>@Role.Name | </strong>
+            <span onclick="return confirm('Czy napewno usunąć?')">
+                <a href="/Roles/Delete?RoleName=@Role.Name" class="delLink" style="color:red;">Usuń</a> | 
+            </span>
+            @Html.ActionLink("Edytuj rolę", "EdytujRole", new { roleName = @Role.Name })
+        </p>
+    }
+</div>
+@Html.ActionLink("Wróć do listy", "Index", "Admin")
