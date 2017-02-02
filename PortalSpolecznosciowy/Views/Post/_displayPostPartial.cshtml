@@ -20,17 +20,9 @@
                         <div class="media">
                             <div class="media-left media-middle pull-left">
                                 <a href="@Url.Content("/ProfilUser/Show/" + post.User.Id)">
-                                    @if (!post.User.Image.IsEmpty())
-                                    {
-                                        if (post.User.Image.StartsWith("https://"))
-                                        {
-                                            <img src="@post.User.Image" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
-                                        }
-                                        else
-                                        {
-                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + post.User.Id + "/" + post.User.Image)" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
-                                        }
-                                    }
+
+                                    @Html.Partial("~/Views/ProfilUser/_showAvatarPostComment.cshtml", post.User)
+
                                 </a>
                             </div>
                             <div class="media-body">

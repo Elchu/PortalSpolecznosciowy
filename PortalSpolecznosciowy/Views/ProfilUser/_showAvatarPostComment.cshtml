@@ -1,0 +1,13 @@
+﻿@model PortalSpolecznosciowy.Models.ApplicationUser
+
+@if (!Model.Image.IsEmpty())
+{
+    if (Model.Image.StartsWith("https://"))
+    {
+        <img src="@Model.Image" class="media-object img-responsive pull-left userAvatar" alt="brak zdjęcia" height="64" width="64" />
+    }
+    else
+    {
+        <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" class="media-object img-responsive pull-left userAvatar" alt="brak zdjęcia" height="64" width="64" />
+    }
+}

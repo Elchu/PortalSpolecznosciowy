@@ -1,7 +1,46 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+@model PortalSpolecznosciowy.Models.ViewModel.SingleCommentUser
+
 @{
-    ViewBag.Title = "ShowSingleComment";
+    ViewBag.Title = "Show Commnet";
 }
 
-<h2>ShowSingleComment</h2>
+<div class="row showSingleComment">
+    <div class="col-lg-8 col-lg-offset-2">
 
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                @if (User.Identity.IsAuthenticated && Model.User.Id == User.Identity.GetUserId())
+                {
+                    @Html.Partial("~/Views/Comment/_dropdownCommentEditDelete.cshtml", Model.Comment)
+                } @*end if*@
+
+                <div class="clearfix">
+
+                    @Html.Partial("~/Views/ProfilUser/_showAvatarPostComment.cshtml", Model.User)
+
+                    <div class="pull-left showSinglePostAuthor">
+                        @if (User.Identity.GetUserId() == Model.User.Id)
+                        {
+                            <a href="@Url.Content("~/ProfilUser/Show/" + Model.User.Id)"><strong>@Model.User.FullName</strong></a>
+                            <br />
+                        }
+                        else
+                        {
+                            <strong>@Html.ActionLink(Model.User.FullName, "Show", "Friend", new { id = Model.User.Id }, null)</strong><br />
+                        }
+                        Data dodania: <small><span class="glyphicon glyphicon-time"></span> @Model.Comment.Date</small>
+                    </div>
+                </div>
+
+                <div id="post_@Model.Comment.CommentId" class="showSingleCommentContent">
+                    @Model.Comment.Content
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

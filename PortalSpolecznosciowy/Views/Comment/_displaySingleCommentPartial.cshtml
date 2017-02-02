@@ -20,27 +20,19 @@
                         <div class="media">
                             <div class="media-left media-middle pull-left">
                                 <a href="@Url.Content("/ProfilUser/Show/" + comment.UserId)">
-                                    @if (!comment.User.Image.IsEmpty())
-                                    {
-                                        if (comment.User.Image.StartsWith("https://"))
-                                        {
-                                            <img src="@comment.User.Image" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
-                                        }
-                                        else
-                                        {
-                                            <img src="@Url.Content("/Content/UploadUsersAvatars/" + comment.User.Id + "/" + comment.User.Image)" class="img-responsive" alt="Avatar użytkownika" height="64" width="64" />
-                                        }
-                                    }
+
+                                    @Html.Partial("~/Views/ProfilUser/_showAvatarPostComment.cshtml", comment.User)
+
                                 </a>
                             </div>
                             <div class="media-body">
                                 <p class="media-heading">
-                                    @Html.ActionLink(comment.User.FullName, "Show", "ProfilUser", new { id = comment.User.Id }, null)
-                                    <small><span class="glyphicon glyphicon-time"></span> @comment.Date </small>
+                                    @Html.ActionLink(comment.User.FullName, "Show", "ProfilUser", new {id = comment.User.Id}, null) <br/>
+                                    Data dodania: <a href="@Url.Content("~/Comment/ShowSingleComment/" + comment.CommentId)"><small><span class="glyphicon glyphicon-time"></span> @comment.Date </small></a>
                                 </p>
-
+                                
                                 <div id="comment_@comment.CommentId">
-                                    @comment.Content
+                                    <p>@comment.Content</p>
                                 </div>
                             </div>
 

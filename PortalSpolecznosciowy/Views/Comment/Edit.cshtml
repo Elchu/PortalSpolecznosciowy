@@ -17,7 +17,9 @@
                 }
 
                 <div class="clearfix">
-                    <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.User.Id + "/" + Model.User.Image)" class="media-object img-responsive pull-left" style="margin-right: 10px;" alt="brak zdjęcia" height="64" width="64" />
+
+                    @Html.Partial("~/Views/ProfilUser/_showAvatarPostComment.cshtml", Model.User)
+
                     <div class="pull-left showSinglePostAuthor">
                         @if (User.Identity.GetUserId() == Model.User.Id)
                         {
@@ -29,7 +31,7 @@
                             <strong>@Model.User.FullName</strong>
                             <br />
                         }
-                        Data dodania: <a href="@Url.Content("~/Post/ShowSinglePost/" + @Model.PostId)" class="text-muted"> <small><span class="glyphicon glyphicon-time"></span> @Model.Date</small></a>
+                        Data dodania: <a href="@Url.Content("~/Comment/ShowSingleComment/" + @Model.CommentId)" class="text-muted"> <small><span class="glyphicon glyphicon-time"></span> @Model.Date</small></a>
                     </div>
                 </div>
 

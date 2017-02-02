@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PortalSpolecznosciowy.Models;
+using PortalSpolecznosciowy.Models.ViewModel;
 
 namespace PortalSpolecznosciowy.Controllers
 {
@@ -112,10 +113,21 @@ namespace PortalSpolecznosciowy.Controllers
             return Json(new { message = "Wystąpił błąd podczas usuwania wpisu. Spróbuj później" }, JsonRequestBehavior.AllowGet);
         }
 
-        ///ToDo dodanie wyswietlania pojedynczego komentarza.
         public ActionResult ShowSingleComment(int id)
         {
-            return View();
+            Comment comment = _db.Comment.FirstOrDefault(p => p.CommentId == id);
+            ApplicationUser user = _db.Users.FirstOrDefault(u => u.Id == comment.UserId);
+
+            if (comment == null || user == null)
+                return HttpNotFound();
+
+            SingleCommentUser singlePostUser = new SingleCommentUser()
+            {
+                Comment = comment,
+                User = user
+            };
+
+            return View(singlePostUser);
         }
     }
 }

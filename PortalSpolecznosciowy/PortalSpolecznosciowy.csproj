@@ -287,6 +287,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\ViewModel\SingleCommentUser.cs" />
     <Compile Include="Models\ViewModel\SinglePostUser.cs" />
     <Compile Include="Models\ViewModel\UserFriendTemp.cs" />
     <Compile Include="Models\ViewModel\UserFriendToAcceptedViewModel.cs" />
@@ -297,6 +298,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\AdminIco\Actions-list-add-user-icon.png" />
+    <Content Include="Content\Images\AdminIco\Actions-user-group-delete-icon.png" />
+    <Content Include="Content\Images\AdminIco\Bookmark-add-icon.png" />
+    <Content Include="Content\Images\AdminIco\Groups-Meeting-Dark-icon.png" />
+    <Content Include="Content\Images\AdminIco\Inventory-icon.png" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -450,6 +456,7 @@
     <Content Include="Views\Admin\UsunRoleUzytkownikowi.cshtml" />
     <Content Include="Views\Admin\UtworzRole.cshtml" />
     <Content Include="Views\Admin\WyswietlRoleUzytkownika.cshtml" />
+    <Content Include="Views\ProfilUser\_showAvatarPostComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

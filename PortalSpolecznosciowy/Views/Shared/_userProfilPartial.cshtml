@@ -16,8 +16,15 @@
     <div class="panel-body text-center">
 
         @if (!Model.Image.IsEmpty())
+        {
+            if (Model.Image.StartsWith("https://"))
             {
-            <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" alt="Avatar użytkownika" height="200" width="200" />
+                <img src="@Model.Image" class="media-object img-responsive pull-left userAvatar" alt="brak zdjęcia" height="200" width="200" />
+            }
+            else
+            {
+                <img src="@Url.Content("/Content/UploadUsersAvatars/" + Model.Id + "/" + Model.Image)" class="media-object img-responsive pull-left userAvatar" alt="brak zdjęcia" height="200" width="200" />
+            }
         }
 
         <h2>
